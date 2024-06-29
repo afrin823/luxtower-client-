@@ -12,18 +12,21 @@ const Navbar = () => {
           <NavLink className="mr-5" to="/assigment">
           Apartment
           </NavLink>
-          <NavLink className="mr-5" to="/about">
-            AboutUs
+          <NavLink className="mr-5" to="/blog">
+            Blog
           </NavLink>
           <NavLink className="mr-5" to="/contact">
             ContactUs
+          </NavLink>
+          <NavLink className="mr-5" to="/contact">
+            Dashboard
           </NavLink>
         </div>
       );
 
     return (
         <div>
-            <div className="navbar bg-base-100">
+            <div className="navbar fixed z-10 bg-opacity-50 max-w-screen-xl bg-black text-white">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

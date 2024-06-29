@@ -1,28 +1,39 @@
-import React, { useRef, useState } from 'react';
+import  { useRef } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 import '../../public/style.css';
 
 // import required modules
-import { Pagination } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 const Banner = () => {
-    const pagination = {
-        clickable: true,
-        renderBullet: function (index, className) {
-            return '<span class="' + className + '">' + (index + 1) + '</span>';
-        },
+    const progressCircle = useRef(null);
+    const progressContent = useRef(null);
+    const onAutoplayTimeLeft = (s, time, progress) => {
+        progressCircle.current.style.setProperty('--progress', 1 - progress);
+        progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
     };
     return (
         <div className='mb-12 mt-0 w-full h-[500px]'>
             <Swiper
-                pagination={pagination}
-                modules={[Pagination]}
+                spaceBetween={30}
+                centeredSlides={true}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                }}
+                pagination={{
+                    clickable: true,
+                }}
+                navigation={true}
+                modules={[Autoplay, Pagination, Navigation]}
+                onAutoplayTimeLeft={onAutoplayTimeLeft}
                 className="mySwiper"
             >
                 <SwiperSlide>
@@ -33,11 +44,11 @@ const Banner = () => {
                         }}>
                         <div className="hero-overlay bg-opacity-40"></div>
                         <div className="hero-content text-neutral-content text-center">
-                            <div className="max-w-md">
+                            <div data-aos="flip-up" className="max-w-md">
                                 <p>LET US FIND YOUR HOME</p>
                                 <h1 className="mb-5 text-5xl font-medium">Luxury Villa In Alice</h1>
                                 <p className="mb-5">
-                                Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows. 
+                                    Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows.
                                 </p>
                                 <button className="btn bg-sky-400 text-white">Find out more</button>
                             </div>
@@ -52,11 +63,11 @@ const Banner = () => {
                         }}>
                         <div className="hero-overlay bg-opacity-60"></div>
                         <div className="hero-content text-neutral-content text-center">
-                        <div className="max-w-md">
+                            <div data-aos="flip-up" className="max-w-md">
                                 <p>LET US FIND YOUR HOME</p>
                                 <h1 className="mb-5 text-5xl font-medium">Luxury Villa In Alice</h1>
                                 <p className="mb-5">
-                                Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows. 
+                                    Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows.
                                 </p>
                                 <button className="btn bg-sky-400 text-white">Find out more</button>
                             </div>
@@ -71,11 +82,11 @@ const Banner = () => {
                         }}>
                         <div className="hero-overlay bg-opacity-60"></div>
                         <div className="hero-content text-neutral-content text-center">
-                        <div className="max-w-md">
+                            <div data-aos="flip-up" className="max-w-md">
                                 <p>LET US FIND YOUR HOME</p>
                                 <h1 className="mb-5 text-5xl font-medium">Luxury Villa In Alice</h1>
                                 <p className="mb-5">
-                                Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows. 
+                                    Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows.
                                 </p>
                                 <button className="btn bg-sky-400 text-white">Find out more</button>
                             </div>
@@ -89,12 +100,12 @@ const Banner = () => {
                             backgroundImage: "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROxt0JTkiDm7tvcmy33JVE_J67FdEKPfCn1g&s)",
                         }}>
                         <div className="hero-overlay bg-opacity-60"></div>
-                        <div className="hero-content text-neutral-content text-center">
-                        <div className="max-w-md">
+                        <div data-aos="flip-up" className="hero-content text-neutral-content text-center">
+                            <div className="max-w-md">
                                 <p>LET US FIND YOUR HOME</p>
                                 <h1 className="mb-5 text-5xl font-medium">Luxury Villa In Alice</h1>
                                 <p className="mb-5">
-                                Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows. 
+                                    Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows.
                                 </p>
                                 <button className="btn bg-sky-400 text-white">Find out more</button>
                             </div>
@@ -109,11 +120,11 @@ const Banner = () => {
                         }}>
                         <div className="hero-overlay bg-opacity-60"></div>
                         <div className="hero-content text-neutral-content text-center">
-                        <div className="max-w-md">
+                            <div data-aos="flip-up" className="max-w-md">
                                 <p>LET US FIND YOUR HOME</p>
                                 <h1 className="mb-5 text-5xl font-medium">Luxury Villa In Alice</h1>
                                 <p className="mb-5">
-                                Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows. 
+                                    Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows.
                                 </p>
                                 <button className="btn bg-sky-400 text-white">Find out more</button>
                             </div>
@@ -128,11 +139,11 @@ const Banner = () => {
                         }}>
                         <div className="hero-overlay bg-opacity-60"></div>
                         <div className="hero-content text-neutral-content text-center">
-                        <div className="max-w-md">
+                            <div data-aos="flip-up" className="max-w-md">
                                 <p>LET US FIND YOUR HOME</p>
                                 <h1 className="mb-5 text-5xl font-medium">Luxury Villa In Alice</h1>
                                 <p className="mb-5">
-                                Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows. 
+                                    Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows.
                                 </p>
                                 <button className="btn bg-sky-400 text-white">Find out more</button>
                             </div>
@@ -147,11 +158,11 @@ const Banner = () => {
                         }}>
                         <div className="hero-overlay bg-opacity-60"></div>
                         <div className="hero-content text-neutral-content text-center">
-                        <div className="max-w-md">
+                            <div data-aos="flip-up" className="max-w-md">
                                 <p>LET US FIND YOUR HOME</p>
                                 <h1 className="mb-5 text-5xl font-medium">Luxury Villa In Alice</h1>
                                 <p className="mb-5">
-                                Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows. 
+                                    Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows.
                                 </p>
                                 <button className="btn bg-sky-400 text-white">Find out more</button>
                             </div>
@@ -166,11 +177,11 @@ const Banner = () => {
                         }}>
                         <div className="hero-overlay bg-opacity-60"></div>
                         <div className="hero-content text-neutral-content text-center">
-                        <div className="max-w-md">
+                            <div data-aos="flip-up" className="max-w-md">
                                 <p>LET US FIND YOUR HOME</p>
                                 <h1 className="mb-5 text-5xl font-medium">Luxury Villa In Alice</h1>
                                 <p className="mb-5">
-                                Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows. 
+                                    Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows.
                                 </p>
                                 <button className="btn bg-sky-400 text-white">Find out more</button>
                             </div>
@@ -185,17 +196,22 @@ const Banner = () => {
                         }}>
                         <div className="hero-overlay bg-opacity-60"></div>
                         <div className="hero-content text-neutral-content text-center">
-                        <div className="max-w-md">
+                            <div data-aos="flip-up" className="max-w-md">
                                 <p>LET US FIND YOUR HOME</p>
                                 <h1 className="mb-5 text-5xl font-medium">Luxury Villa In Alice</h1>
                                 <p className="mb-5">
-                                Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows. 
+                                    Featuring a refined palette of natural materials, the open living spaces provide a warm counterpoint to the soaring ceilings and full-height windows.
                                 </p>
                                 <button className="btn bg-sky-400 text-white">Find out more</button>
                             </div>
                         </div>
                     </div>
                 </SwiperSlide>
+                <div>
+                    <svg viewBox="0 0 48 48" ref={progressCircle}>
+                    </svg>
+                    <span ref={progressContent}></span>
+                </div>
             </Swiper>
         </div>
     );
