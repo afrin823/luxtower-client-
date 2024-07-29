@@ -5,12 +5,16 @@ import Location from "./Location";
 
 
 const Home = () => {
+ 
     return (
         <div>
             <Banner></Banner>
             <Features></Features>
             <AboutBuliding></AboutBuliding>
+            
+           
             <Location></Location>
+
         </div>
     );
 };

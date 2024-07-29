@@ -1,0 +1,31 @@
+[
+    {
+      "id": 1,
+      "code": "SUMMER10",
+      "discount": 10,
+      "description": "Summer Sale Discount",
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "code": "WELCOME20",
+      "discount": 20,
+      "description": "Welcome New User Discount",
+      "isActive": false
+    },
+    {
+      "id": 3,
+      "code": "BLACKFRIDAY30",
+      "discount": 30,
+      "description": "Black Friday Sale",
+      "isActive": true
+    },
+    {
+      "id": 4,
+      "code": "LOYALTY5",
+      "discount": 5,
+      "description": "Loyalty Program Discount",
+      "isActive": true
+    }
+  ]
+  
