@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Blog from "../Components/Blog/Blog";
 import SingIn from "../Components/SingIn";
 import Resister from "../Components/Resister";
+import Contact from "../pages/ContactUs/Contact";
 
   const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ import Resister from "../Components/Resister";
           path: '/signup',
           element: <Resister></Resister>
         },
+        {
+          path: '/contact',
+          element: <Contact></Contact>
+        }
       
       ]
     },
