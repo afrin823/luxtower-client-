@@ -1,8 +1,12 @@
+import { Helmet } from 'react-helmet-async';
 
 
 const Blog = () => {
     return (
         <div>
+            <Helmet>
+                <title>Blog</title>
+            </Helmet>
             <section className="dark:bg-gray-100 pt-24 dark:text-gray-800">
                 <div className="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
                     <a rel="noopener noreferrer" href="#" className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-50">
