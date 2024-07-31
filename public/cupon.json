@@ -1,55 +1,55 @@
 [
     {
-      "id": 1,
+      "_id": 1,
       "code": "SUMMER10",
       "discount": 10,
       "description": "Summer Sale Discount",
       "isActive": true
     },
     {
-      "id": 2,
+      "_id": 2,
       "code": "WELCOME20",
       "discount": 20,
       "description": "Welcome New User Discount",
       "isActive": false
     },
     {
-      "id": 3,
+      "_id": 3,
       "code": "BLACKFRIDAY30",
       "discount": 30,
       "description": "Black Friday Sale",
       "isActive": true
     },
     {
-      "id": 4,
+      "_id": 4,
       "code": "LOYALTY5",
       "discount": 5,
       "description": "Loyalty Program Discount",
       "isActive": true
     },
     {
-      "id": 5,
+      "_id": 5,
       "code": "SUMMER10",
       "discount": 10,
       "description": "Summer Sale Discount",
       "isActive": true
     },
     {
-      "id": 6,
+      "_id": 6,
       "code": "WELCOME20",
       "discount": 20,
       "description": "Welcome New User Discount",
       "isActive": false
     },
     {
-      "id": 7,
+      "_id": 7,
       "code": "BLACKFRIDAY30",
       "discount": 30,
       "description": "Black Friday Sale",
       "isActive": true
     },
     {
-      "id": 9,
+      "_id": 9,
       "code": "LOYALTY5",
       "discount": 5,
       "description": "Loyalty Program Discount",

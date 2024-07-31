@@ -5,7 +5,7 @@ const Cupon = () => {
     const [cupon, setCupon] = useState([]);
 
     useEffect(() => {
-        fetch('/cupon.json')
+        fetch('http://localhost:4000/coupon')
             .then(res => res.json())
             .then(data => {
                 const codeItems = data.filter(item => item.code !== 'SUMMER10')

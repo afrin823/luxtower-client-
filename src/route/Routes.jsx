@@ -5,6 +5,7 @@ import Blog from "../Components/Blog/Blog";
 import SingIn from "../Components/SingIn";
 import Resister from "../Components/Resister";
 import Contact from "../pages/ContactUs/Contact";
+import Apperments from "../pages/Apperments/Apperments";
 
   const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ import Contact from "../pages/ContactUs/Contact";
         {
           path: '/contact',
           element: <Contact></Contact>
+        },
+        {
+          path: '/apartments',
+          element: <Apperments></Apperments>
         }
       
       ]
