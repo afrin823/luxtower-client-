@@ -67,6 +67,7 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       const userEmail = currentUser?.email || user?.email;
       const loggedUser = { email: userEmail };
+      console.log(loggedUser);
 
       //  console.log("currenct users", currentUser);
       setUser(currentUser);

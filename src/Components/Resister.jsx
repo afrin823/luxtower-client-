@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BsGithub } from "react-icons/bs";
 import { AuthContext } from "../firebase/AuthProvider";
+import { FaGooglePlusG } from "react-icons/fa";
 
 const Resister = () => {
   const [nameError, setNameError] = useState("");
@@ -235,7 +236,8 @@ const Resister = () => {
                 aria-label="Log in with Google"
                 className="btn border-1 border-yellow-500 w-full rounded-sm"
               >
-            <img className="w-8" src="https://i.ibb.co/dQs5hVM/Logo-google-icon-PNG-removebg-preview-1.png"  alt="" />
+              <span className="text-4xl text-orange-400"><FaGooglePlusG />
+              </span>
               </button>
             </div>
             </form>

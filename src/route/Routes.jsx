@@ -6,6 +6,7 @@ import SingIn from "../Components/SingIn";
 import Resister from "../Components/Resister";
 import Contact from "../pages/ContactUs/Contact";
 import Apperments from "../pages/Apperments/Apperments";
+import PrivateRoute from "../firebase/PrivetRoute";
 
   const router = createBrowserRouter([
     {
@@ -18,7 +19,9 @@ import Apperments from "../pages/Apperments/Apperments";
         },
         {
           path: '/blog',
-          element: <Blog></Blog>
+          element: <PrivateRoute>
+            <Blog></Blog>
+          </PrivateRoute>
         },
         {
           path: '/signin',
@@ -34,7 +37,9 @@ import Apperments from "../pages/Apperments/Apperments";
         },
         {
           path: '/apartments',
-          element: <Apperments></Apperments>
+          element: 
+            <Apperments></Apperments>
+         
         }
       
       ]

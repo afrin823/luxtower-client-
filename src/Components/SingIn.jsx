@@ -5,74 +5,65 @@ import { FiEye } from "react-icons/fi";
 import { GoEyeClosed } from "react-icons/go";
 import axios from "axios";
 
-import { BsGithub } from "react-icons/bs";
+import { FaGooglePlusG } from "react-icons/fa";
 import { AuthContext } from "../firebase/AuthProvider";
 
-const SingIn = () => {
+const SignIn = () => {
   const [signinError, setSigninError] = useState("");
-  const [singinSuccesfull, setSinginSuccesfull] = useState("");
+  const [signinSuccessful, setSigninSuccessful] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [newError, setNewErrot] = useState("");
-  const [newErrorpassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError] = useState("");
   const location = useLocation();
-  // console.log(location);
-
-  //-----------------
-
-  const { signInUser, signInWithGoogle } =
-    useContext(AuthContext);
+  const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
-  //-----------------------------
 
   const handleSignIn = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    // console.log(email, password);
-    // console.log(password.length);
 
-    if (email.length == 0) {
+    if (!email) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "please type your email",
+        text: "Please type your email",
       });
-      setNewErrot("please type your email");
+      setEmailError("Please type your email");
       return;
     }
-    setNewErrot("");
+    setEmailError("");
 
-    //-----------------------------------------
     setSigninError("");
-    setSinginSuccesfull("");
-
-    //--------------------------
+    setSigninSuccessful("");
 
     signInUser(email, password)
       .then((result) => {
-        const loggedInUser = result.user;
-        //jwt kaj start
         const user = { email };
 
-        axios
-          .post("http://localhost:5000/jwt", user, { withCredentials: true })
-
+        axios.post("http://localhost:5000/jwt", user, { withCredentials: true })
           .then((res) => {
-            console.log(res.data);
             if (res.data.success) {
               navigate(location?.state ? location?.state : "/");
             }
+          })
+          .catch((err) => {
+            console.error(err);
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Failed to authenticate",
+            });
+            setSigninError("Failed to authenticate");
           });
 
-        // e.target.reset();
         Swal.fire({
-          title: "signIn Successfull",
-          text: "User Succesfully SignIn",
+          title: "Sign-In Successful",
+          text: "User successfully signed in",
           icon: "success",
         });
-        // navigate(location?.state ? location.state : "/");
-        setSinginSuccesfull("Succesfully SignIn ");
+        setSigninSuccessful("Successfully signed in");
       })
       .catch((error) => {
         console.error(error);
@@ -84,117 +75,97 @@ const SingIn = () => {
         setSigninError(error.message);
       });
   };
-  //-----------------------------
 
-  const handleGooglrSignIn = () => {
+  const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
         navigate(location?.state ? location.state : "/");
-        //  console.log(result.user);
       })
       .catch((error) => {
         console.error(error.message);
       });
   };
-  //-----------------------------------
-
 
   return (
-    <div>
-      <div className=" mt-0 pt-16 mb-5">
+    <div className="mt-0 pt-16 mb-5">
+      <div className="container mx-auto px-4">
+        <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mx-auto my-10">
+          <form onSubmit={handleSignIn} className="card-body">
+            <h1 className="text-center text-3xl font-bold">Login</h1>
+            <div className="form-control font-normal">
+              <label className="label">
+                <span className="text-sm">Email</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="email"
+                required
+                className="input input-bordered text-sm"
+              />
+              <p className="text-red-500">{emailError}</p>
+            </div>
 
-        <div className="container mx-auto px-4">
-          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mx-auto my-10">
-            <form onSubmit={handleSignIn} className="card-body">
-              <h1 className="text-center text-3xl font-bold">Login
-              </h1>
-              <div className="form-control font-normal">
-                <label className="label">
-                  <span className="text-sm">Email</span>
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="email"
-                  required
-                  className="input input-bordered text-sm"
-                />
-                <p className="text-red-500">{newError}</p>
-              </div>
-
-              <div className="form-control  font-normal relative">
-                <label className="label">
-                  <span className="text-sm">Password</span>
-                </label>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  placeholder="password"
-                  required
-                  className="input input-bordered text-sm"
-                />
-                <p className="text-red-500">{newErrorpassword}</p>
-                <span
-                  className="absolute top-3 right-8 mt-10"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? <GoEyeClosed /> : <FiEye />}
-                </span>
-                <label className="label font-normal">
-                  <a href="#" className="text-sm link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
-                <div className="form-control mt-6">
-                <button className="btn  text-base font-semibold bg-[#3498db] text-white">
+            <div className="form-control font-normal relative">
+              <label className="label">
+                <span className="text-sm">Password</span>
+              </label>
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="password"
+                required
+                className="input input-bordered text-sm"
+              />
+              <p className="text-red-500">{passwordError}</p>
+              <span
+                className="absolute top-3 right-8 mt-10 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <GoEyeClosed /> : <FiEye />}
+              </span>
+              <label className="label font-normal">
+                <a href="#" className="text-sm link link-hover">
+                  Forgot password?
+                </a>
+              </label>
+              <div className="form-control mt-6">
+                <button className="btn text-base font-semibold bg-[#3498db] text-white">
                   Login
                 </button>
               </div>
-              </div>
-              <p className="text-center text-base">
-              Dont have an Account
-              <Link to="/signup" className="btn text-base btn-link"> Sign Up          
-              </Link>
+            </div>
+            <p className="text-center text-base">
+              Don&pos;t have an Account
+              <Link to="/signup" className="btn text-base btn-link"> Sign Up</Link>
               <div className="divider px-6">Continue With</div>
             </p>
 
-              
-              
-          
-
-            <div className="flex justify-center ">
-              <button  onClick={handleGooglrSignIn}
+            <div className="flex justify-center">
+              <button
+                onClick={handleGoogleSignIn}
                 aria-label="Log in with Google"
                 className="btn border-1 border-yellow-500 w-full rounded-sm"
               >
-              <img className="w-8" src="https://i.ibb.co/dQs5hVM/Logo-google-icon-PNG-removebg-preview-1.png"  alt="" />
-              
+                <span className="text-4xl text-orange-400"><FaGooglePlusG /></span>
               </button>
-
-              
             </div>
-            </form>
-         
+          </form>
 
-           
-
-            {signinError && (
-              <p className="text-red-700 text-xl p-4 text-center font-semibold">
-                {signinError}
-              </p>
-            )}
-            {singinSuccesfull && (
-              <p className="text-green-700 text-xl p-4 text-center font-semibold">
-                {singinSuccesfull}
-              </p>
-            )}
-
-
-          </div>
+          {signinError && (
+            <p className="text-red-700 text-xl p-4 text-center font-semibold">
+              {signinError}
+            </p>
+          )}
+          {signinSuccessful && (
+            <p className="text-green-700 text-xl p-4 text-center font-semibold">
+              {signinSuccessful}
+            </p>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default SingIn;
+export default SignIn;
