@@ -18,6 +18,7 @@ const SignIn = () => {
   const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
 
+
   const handleSignIn = (e) => {
     e.preventDefault();
     const form = e.target;

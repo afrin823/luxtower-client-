@@ -1,15 +1,41 @@
 import Swal from "sweetalert2";
 import useAuth from "../../firebase/hook/useAuth/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
 
 const ApartmentCard = ({ item }) => {
-    const { apartmentNo, floorNo, image, blockName, rent } = item;
+    const { apartmentNo, floorNo, image, blockName, rent, _id } = item;
     const { user } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+    const useAxios = useAxiosPublic();
 
     const handleAgreement = (item) => {
        if( user && user.email){
         //send apartment in database
+        console.log(user.email, item);
+        const apartmentIteam = {
+            apartmentId : _id,
+            email: user.email,
+            apartmentNo,
+            blockName,
+            floorNo,
+            rent
+        }
+        useAxios.post('/bookedApartments', apartmentIteam)
+        .then(res => {
+            console.log(res.data);
+            if(res.data.insertedId){
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${apartmentNo} added to your Apartment`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
+        })
+    
        }else{
         Swal.fire({
             title: "You are not logged In",
@@ -21,7 +47,7 @@ const ApartmentCard = ({ item }) => {
             confirmButtonText: "Yes, login!"
           }).then((result) => {
             if (result.isConfirmed) {
-              navigate('/signin')
+              navigate('/signin', {state: {from: location}})
             }
           });
        }
