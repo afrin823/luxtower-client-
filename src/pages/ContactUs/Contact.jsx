@@ -13,7 +13,7 @@ const Contact = () => {
                         <h2 className="text-4xl font-bold leading-tight lg:text-5xl">Let s talk!</h2>
                         <div className="dark:text-gray-600">Vivamus in nisl metus? Phasellus.</div>
                     </div>
-                    <img src="https://i.ibb.co/Z1sfKB7/4affd89a9f1bef68eaddc24a749fa532-removebg-preview.png" alt="" className="md:h-54" />
+                    <img data-aos="fade-up" src="https://i.ibb.co/Z1sfKB7/4affd89a9f1bef68eaddc24a749fa532-removebg-preview.png" alt="" className="md:h-54" />
                 </div>
                 <form noValidate="" className="space-y-6">
                     <div>

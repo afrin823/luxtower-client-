@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { BsBuildings } from "react-icons/bs";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../firebase/AuthProvider";
@@ -8,20 +8,6 @@ const Navbar = () => {
 
   const { user, logOut } = useContext(AuthContext);
   //--------------------------
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    const localTheme = localStorage.getItem("theme");
-    document.querySelector("html").setAttribute("data-theme", localTheme);
-  }, [theme]);
-
-  const handleToggle = (e) => {
-    if (e.target.checked) {
-      setTheme("synthwave");
-    } else {
-      setTheme("light");
-    }
-  };
   // console.log(theme);
   //--------------------
 
@@ -126,17 +112,6 @@ const Navbar = () => {
                   </button></Link>
             };
             
-            <label className="swap swap-rotate">
-              {/* this hidden checkbox controls the state */}
-              <input
-                onChange={handleToggle}
-                type="checkbox"
-                className="toggle theme-controller " value="synthwave"
-              // value="synthwave"
-              />
-            </label>
-
-            {/* dark light end  */}
           </div>
         </div>
       </div>

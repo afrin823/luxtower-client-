@@ -7,6 +7,8 @@ import Resister from "../Components/Resister";
 import Contact from "../pages/ContactUs/Contact";
 import Apperments from "../pages/Apperments/Apperments";
 import PrivateRoute from "../firebase/PrivetRoute";
+import Dashboard from "../Layout/Dashboard";
+import DashboardMenu from "../pages/Dashboard/Cart/DashboardMenu";
 
   const router = createBrowserRouter([
     {
@@ -44,6 +46,16 @@ import PrivateRoute from "../firebase/PrivetRoute";
       
       ]
     },
+    {
+      path: 'dashboard',
+      element: <Dashboard></Dashboard>,
+      children: [
+        {
+          path: 'dashboardMenu',
+          element: <DashboardMenu></DashboardMenu>
+        }
+      ]
+    }
   ]);
 
 export default router;
