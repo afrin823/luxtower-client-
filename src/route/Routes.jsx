@@ -4,11 +4,13 @@ import Home from "../pages/Home";
 import Blog from "../Components/Blog/Blog";
 import SingIn from "../Components/SingIn";
 import Resister from "../Components/Resister";
-import Contact from "../pages/ContactUs/Contact";
 import Apperments from "../pages/Apperments/Apperments";
+import Cart from "../Components/Dashboard/Cart";
+import Dashboard from "../Components/Dashboard/Dashboard";
+import Announcement from "../Components/Dashboard/Announcement/Announcement";
+import ControlPanel from "../Layout/ControlPanel/ControlPanel";
+import Profile from "../Components/Dashboard/Profile/Profile";
 import PrivateRoute from "../firebase/PrivetRoute";
-import Dashboard from "../Layout/Dashboard";
-import DashboardMenu from "../pages/Dashboard/Cart/DashboardMenu";
 
   const router = createBrowserRouter([
     {
@@ -21,9 +23,8 @@ import DashboardMenu from "../pages/Dashboard/Cart/DashboardMenu";
         },
         {
           path: '/blog',
-          element: <PrivateRoute>
+          element: 
             <Blog></Blog>
-          </PrivateRoute>
         },
         {
           path: '/signin',
@@ -34,25 +35,35 @@ import DashboardMenu from "../pages/Dashboard/Cart/DashboardMenu";
           element: <Resister></Resister>
         },
         {
-          path: '/contact',
-          element: <Contact></Contact>
-        },
-        {
           path: '/apartments',
           element: 
-            <Apperments></Apperments>
+            <PrivateRoute>
+              <Apperments></Apperments>
+            </PrivateRoute>
          
         }
       
       ]
     },
     {
-      path: 'dashboard',
-      element: <Dashboard></Dashboard>,
+      path: '/dashboard',
+      element: <ControlPanel></ControlPanel>,
       children: [
         {
-          path: 'dashboardMenu',
-          element: <DashboardMenu></DashboardMenu>
+          path: '/dashboard',
+          element: <Dashboard></Dashboard>
+        },
+        {
+          path: '/dashboard/profile',
+          element: <Profile></Profile>
+        },
+        {
+          path: 'cart',
+          element: <Cart></Cart>
+        },
+        {
+          path: '/dashboard/announcements',
+          element: <Announcement></Announcement>
         }
       ]
     }

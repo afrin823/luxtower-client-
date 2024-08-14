@@ -17,6 +17,7 @@ const Apperments = () => {
         },
     });
     if (isPending) return <Loader />;
+    
     return (
         <div className="pt-24">
             <Helmet>

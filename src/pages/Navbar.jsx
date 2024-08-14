@@ -29,23 +29,22 @@ const Navbar = () => {
       <NavLink className="mr-5" to="/">
         Home
       </NavLink>
-      <NavLink className="mr-5" to="/apartments">
-        Apartment
-      </NavLink>
-      <NavLink className="mr-5" to="/blog">
-        Blog
-      </NavLink>
-
       {user && (
         <>
+          <NavLink className="mr-5" to="/apartments">
+            Apartment
+          </NavLink>
           <NavLink className="mr-5" to="/dashboard">
             Dashboad
           </NavLink>
         </>
       )}
-      <NavLink className="mr-5" to="/contact">
-        ContactUs
+      <NavLink className="mr-5" to="/blog">
+        Blog
       </NavLink>
+
+
+
     </div>
   );
 
@@ -109,9 +108,9 @@ const Navbar = () => {
                 :
                 <Link to={'/signin'}><button className="">
                   <img className="w-10 flex rounded-full" src="https://i.ibb.co/jh6zM89/Screenshot-11.png" alt="" />
-                  </button></Link>
+                </button></Link>
             };
-            
+
           </div>
         </div>
       </div>
