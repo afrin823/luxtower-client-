@@ -47,7 +47,7 @@ const SignIn = () => {
       .then((result) => {
         const user = { email };
 
-        axios.post("http://localhost:4000/jwt", user, { withCredentials: true })
+        axios.post("https://buliding-management-server.vercel.app/jwt", user, { withCredentials: true })
           .then((res) => {
             if (res.data.success) {
               navigate(location?.state ? location.state : "/");

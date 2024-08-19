@@ -26,9 +26,10 @@ const ApartmentCard = ({ apartments }) => {
         axiosSecure
           .post("/bookedApartments", apartmentInfo)
           .then((res) => {
+            console.log(res.data.status);
             Swal.fire({
-              title: `${res.data.message}`,
-              icon: `${res.data.status === 200 ? "success" : "warning"}`,
+              title: `success`, 
+              icon: "success",
             });
           })
           .catch((error) => {

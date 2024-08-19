@@ -11,6 +11,7 @@ import Announcement from "../Components/Dashboard/Announcement/Announcement";
 import ControlPanel from "../Layout/ControlPanel/ControlPanel";
 import Profile from "../Components/Dashboard/Profile/Profile";
 import PrivateRoute from "../firebase/PrivetRoute";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
   const router = createBrowserRouter([
     {
@@ -64,6 +65,10 @@ import PrivateRoute from "../firebase/PrivetRoute";
         {
           path: '/dashboard/announcements',
           element: <Announcement></Announcement>
+        },
+        {
+          path: '/dashboard/payment',
+          element: <Payment></Payment>
         }
       ]
     }

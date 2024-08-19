@@ -10,12 +10,12 @@ const Apperments = () => {
     const axiosSecure = useAxiosSecure();
 
     const { isPending, data } = useQuery({
-        queryKey: ["apartments"],
+        queryKey: ["apartment"],
         queryFn: async () => {
-            const res = await axiosSecure.get("/apartment");
-            return res.data;
+          const res = await axiosSecure.get("/apartment");
+          return res.data;
         },
-    });
+      });
     if (isPending) return <Loader />;
     
     return (
