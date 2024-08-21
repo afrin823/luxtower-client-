@@ -1,18 +1,18 @@
-import { FaHome, FaUser, FaChartBar, FaCog, FaSignOutAlt } from "react-icons/fa";
+import { FaHome, FaUser, FaSignOutAlt, FaChartBar, FaCog } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useUsersRole from "../useUsersRole/useUsersRole";
 import { MdDashboardCustomize } from "react-icons/md";
 import useAuth from "../../firebase/hook/useAuth/useAuth";
 
+
 function DashboardNavbar() {
-  const { logOut } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
   const usersRole = useUsersRole();
-  
 
   const handleLogout = () => {
-    logOut()
+    logout()
       .then((res) => {
         console.log(res);
         Swal.fire({
@@ -47,7 +47,7 @@ function DashboardNavbar() {
           <span>Profile</span>
         </NavLink>
       </li>
-      {usersRole === "admin" && (
+   
         <li>
           <NavLink
             to="/dashboard/manage-member"
@@ -57,7 +57,7 @@ function DashboardNavbar() {
             <span>Manage Members</span>
           </NavLink>
         </li>
-      )}
+    
       <li>
         <NavLink
           to="/dashboard/announcements"
@@ -69,7 +69,7 @@ function DashboardNavbar() {
           </span>
         </NavLink>
       </li>
-      {usersRole === "member" && (
+     
         <>
           <li>
             <NavLink
@@ -90,8 +90,8 @@ function DashboardNavbar() {
             </NavLink>
           </li>
         </>
-      )}
-      {usersRole === "admin" && (
+   
+     
         <>
           <li>
             <NavLink
@@ -112,13 +112,7 @@ function DashboardNavbar() {
             </NavLink>
           </li>
         </>
-      )}
-      <li>
-        <NavLink to="/" className="flex items-center space-x-3">
-          <FaHome />
-          <span>Home</span>
-        </NavLink>
-      </li>
+
       <li>
         <div className="flex items-center space-x-3">
           <FaSignOutAlt />

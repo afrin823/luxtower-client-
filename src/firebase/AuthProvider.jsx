@@ -4,7 +4,6 @@ export const AuthContext = createContext(null);
 import PropTypes from "prop-types";
 
 import {
-  GithubAuthProvider,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -14,16 +13,16 @@ import {
   updateProfile,
 } from "firebase/auth";
 import auth from "./firebase.config";
+import useAxiosPublic from "./hook/useAuth/useAxiosPublic/useAxiosPublic";
 
 //--------------------------------------
-
-const googleProvider = new GoogleAuthProvider();
-const gitHubProvider = new GithubAuthProvider();
-//----------------------------
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const googleProvider = new GoogleAuthProvider();
+  const axiosPublic = useAxiosPublic();
+
   //---------------------------------
   const createUser = (email, password) => {
     setLoading(true);
@@ -49,13 +48,6 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
   //---------------
-  const signInWithGithub = () => {
-    setLoading(true);
-    return signInWithPopup(auth, gitHubProvider);
-  };
-
-  //----------------------
-
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
@@ -65,12 +57,22 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      const userEmail = currentUser?.email || user?.email;
-      const loggedUser = { email: userEmail };
-      console.log(loggedUser);
-
       //  console.log("currenct users", currentUser);
       setUser(currentUser);
+      if (currentUser) {
+        //get token and store client
+        const userInfo = {email: currentUser.email}
+        axiosPublic.post('/jwt', userInfo)
+        .then(res => {
+          if (res.data.token){
+              localStorage.setItem('access-token', res.data.token)
+          }
+        }
+         
+        )
+      } else {
+        localStorage.removeItem('access-token');
+      }
       setLoading(false);
 
     });
@@ -88,7 +90,6 @@ const AuthProvider = ({ children }) => {
     signInUser,
     logOut,
     signInWithGoogle,
-    signInWithGithub,
     updateUserProfile,
     auth,
   };

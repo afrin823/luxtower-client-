@@ -1,145 +1,52 @@
 import Swal from "sweetalert2";
-import { updateProfile } from "firebase/auth";
-import { GoEyeClosed } from "react-icons/go";
-import { FiEye } from "react-icons/fi";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import signUp from "../../public/signUp.json"
-import { AuthContext } from "../firebase/AuthProvider";
-import { FaGooglePlusG } from "react-icons/fa";
 import Lottie from "lottie-react";
 import { Helmet } from "react-helmet-async";
+import Loader from "./Loader/Loader";
+import SocialLogin from "./useUsersRole/SocialLogin/SocialLogin";
+import useAuth from "../firebase/hook/useAuth/useAuth";
+import useAxiosPublic from "../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
 
 const Resister = () => {
-  const [nameError, setNameError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [termsError, settermsError] = useState("");
 
-  const [signupError, setSignupError] = useState("");
-
-  const [singupSuccesfull, setSingupSuccesfull] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  //-------------------------------
-  const { createUser, auth, signInWithGoogle } =
-    useContext(AuthContext);
+  const [name, setName] = useState(null);
+  const [photo, setPhoto] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const { createUser, updateUserProfile, loading, user } = useAuth();
   const navigate = useNavigate();
-  //---------------------------------
+  const axiosPublic = useAxiosPublic();
+
+  if (loading) return <Loader />;
+  if (user) return navigate("/");
+
   const handleSignUp = (e) => {
     e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    const photoURL = form.photoURL.value;
-    const accepted = form.terms.checked;
-    // console.log(name, email, photoURL, password);
-    //------------------------
 
-    if (!name) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please type your name",
-      });
-      setNameError("Please type your name");
-      return;
-    }
-    setNameError("");
-
-    if (email.length == 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please type your email",
-      });
-      setEmailError("Please type your email");
-      return;
-    }
-    setEmailError("");
-
-    if (password.length == 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please type 6 character Password",
-      });
-      setPasswordError("Please type 6 character Password");
-      return;
-    } else if (!/^(?=.*[A-Z])(?=.*[a-z]).{6,}$/.test(password)) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "your password should have at least one upper, one lower case & must 6charactor ",
-      });
-      setPasswordError(
-        "your password should have at least one upper, one lower case & must 6charactor "
-      );
-      return;
-    }
-    setPasswordError("");
-
-    if (!accepted) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "please accept our conditions",
-      });
-      settermsError("please accept our conditions");
-      return;
-    }
-    settermsError("");
-
-    //-------------------------
-    setSignupError("");
-    setSingupSuccesfull("");
-
-    //-------------------------
     createUser(email, password)
-      .then((result) => {
-        updateProfile(auth.currentUser, {
-          displayName: name,
-          photoURL: photoURL,
-        })
-          .then(() => {
-            // Profile updated!
-            // ...
-          })
-          .catch(() => {
-            // An error occurred
-            // ...
+      .then((res) => {
+        axiosPublic.post("/users", { name, email })
+        .then((res) => {
+          Swal.fire({
+            title: `Sign up sucessfully`,
+            icon: "success",
           });
-
-        //  console.log(result.user);
-        e.target.reset();
-        Swal.fire({
-          title: "signUp Successfull",
-          text: "Created Succesfully SignUp",
-          icon: "success",
         });
+        updateUserProfile(name, photo);
+        console.log(res);
         navigate("/");
       })
       .catch((error) => {
-        console.error(error.message);
-
+        console.error(error);
         Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Email Already In Use",
+          title: "Something went wrong. Try later.",
+          icon: "warning",
         });
       });
   };
-  //----------------------------
-  const handleGooglrSignIn = () => {
-    signInWithGoogle()
-      .then((result) => {
-        navigate(location?.state ? location.state : "/");
-        console.log(result.user);
-      })
-      .catch((error) => {
-        console.error(error.message);
-      });
-  };
+
 
   //-----------------------------------
 
@@ -164,13 +71,13 @@ const Resister = () => {
             <span className="font-normal text-sm">Name</span>
           </label>
           <input
-            type="Name"
+            type="text"
             placeholder="Name"
-            name="name"
+            className="input input-bordered"
             required
-            className="input input-bordered font-normal"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
-          <p className="text-red-500">{nameError}</p>
         </div>
 
         <div className="form-control font-semibold">
@@ -179,12 +86,13 @@ const Resister = () => {
           </label>
           <input
             type="email"
-            name="email"
             placeholder="email"
+            className="input input-bordered"
             required
-            className="input input-bordered font-normal"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <p className="text-red-500">{emailError}</p>
+
         </div>
 
         <div className="form-control font-semibold">
@@ -192,10 +100,12 @@ const Resister = () => {
             <span className="font-normal text-sm">Photo URL</span>
           </label>
           <input
-            type="photoURL"
-            name="photoURL"
-            placeholder="photoURL"
-            className="input input-bordered font-normal"
+            type="text"
+            placeholder="Photo URL"
+            className="input input-bordered"
+            required
+            value={photo}
+            onChange={(e) => setPhoto(e.target.value)}
           />
         </div>
 
@@ -203,31 +113,20 @@ const Resister = () => {
           <label className="label">
             <span className="font-normal text-sm">Password</span>
           </label>
-
           <input
-            type={showPassword ? "text" : "password"}
-            name="password"
+            type="password"
             placeholder="password"
-            className="input input-bordered font-normal"
+            className="input input-bordered"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
-          <p className="text-red-500">{passwordError}</p>
-
-          <span
-            className="absolute top-3 right-8 mt-10"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? <GoEyeClosed /> : <FiEye />}
-          </span>
-        </div>
-
-        <div className="pl-4 py-2 font-medium">
-          <input type="checkbox" name="terms" id="terms" />
-          <label className="ml-2 " htmlFor="terms">
-            Accept Our Terms & Conditions
+          <label className="label">
+            <a href="#" className="label-text-alt link link-hover">
+              Forgot password?
+            </a>
           </label>
-          <p className="text-red-500">{termsError}</p>
         </div>
-
         <div className="form-control text-2xl font-semibold ">
           <button className="btn text-base font-semibold bg-[#3498db] text-white">
             Register
@@ -238,30 +137,8 @@ const Resister = () => {
           <Link to="/signin" className="btn text-sm btn-link">Sign In</Link>
           <p className="divider px-6 pt-0">Continue With</p>
         </div>
-        <div className="form-control text-2xl font-semibold ">
-          <button
-            onClick={handleGooglrSignIn}
-            aria-label="Log in with Google"
-            className="btn border-1 border-yellow-500 w-full rounded-sm"
-          >
-            <span className="text-4xl text-orange-400"><FaGooglePlusG />
-            </span>
-          </button>
-        </div>
+        <SocialLogin></SocialLogin>
       </form>
-
-
-
-      {signupError && (
-        <p className="text-red-700 text-xl p-4 text-center font-semibold">
-          {signupError}
-        </p>
-      )}
-      {singupSuccesfull && (
-        <p className="text-green-700 text-xl p-4 text-center font-semibold">
-          {singupSuccesfull}
-        </p>
-      )}
     </div>
 
   );

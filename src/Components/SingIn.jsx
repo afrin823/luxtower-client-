@@ -3,22 +3,23 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FiEye } from "react-icons/fi";
 import { GoEyeClosed } from "react-icons/go";
-import axios from "axios";
 import regitser from "../../public/regitser.json";
-import { FaGooglePlusG } from "react-icons/fa";
 import { AuthContext } from "../firebase/AuthProvider";
 import Lottie from "lottie-react";
 import { Helmet } from "react-helmet-async";
+import SocialLogin from "./useUsersRole/SocialLogin/SocialLogin";
+import useAxiosPublic from "../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
 
 const SignIn = () => {
-  const [signinError, setSigninError] = useState("");
-  const [signinSuccessful, setSigninSuccessful] = useState("");
+  const [setSigninError] = useState("");
+  const [setSigninSuccessful] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const location = useLocation();
-  const { signInUser, signInWithGoogle } = useContext(AuthContext);
+  const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -47,7 +48,7 @@ const SignIn = () => {
       .then((result) => {
         const user = { email };
 
-        axios.post("https://buliding-management-server.vercel.app/jwt", user, { withCredentials: true })
+        axiosPublic.post("/jwt", user, { withCredentials: true })
           .then((res) => {
             if (res.data.success) {
               navigate(location?.state ? location.state : "/");
@@ -78,17 +79,6 @@ const SignIn = () => {
           text: error.message,
         });
         setSigninError(error.message);
-      });
-  };
-
-  const handleGoogleSignIn = () => {
-    signInWithGoogle()
-      .then((result) => {
-        navigate(location?.state ? location.state : "/");
-      })
-      .catch((error) => {
-        console.error(error.message);
-        setSigninError("Google sign-in failed");
       });
   };
 
@@ -156,28 +146,9 @@ const SignIn = () => {
           <Link to="/signup" className="btn text-base btn-link"> Sign Up</Link>
           <div className="divider px-6">Continue With</div>
         </p>
-
-        <div className="flex justify-center">
-          <button
-            onClick={handleGoogleSignIn}
-            aria-label="Log in with Google"
-            className="btn border-1 border-yellow-500 w-full rounded-sm"
-          >
-            <span className="text-4xl text-orange-400"><FaGooglePlusG /></span>
-          </button>
-        </div>
+        <SocialLogin></SocialLogin>
       </form>
 
-      {signinError && (
-        <p className="text-red-700 text-xl p-4 text-center font-semibold">
-          {signinError}
-        </p>
-      )}
-      {signinSuccessful && (
-        <p className="text-green-700 text-xl p-4 text-center font-semibold">
-          {signinSuccessful}
-        </p>
-      )}
     </div>
   );
 };

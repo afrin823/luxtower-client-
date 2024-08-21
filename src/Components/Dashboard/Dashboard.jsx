@@ -7,12 +7,13 @@ import { Helmet } from "react-helmet-async";
 function Dashboard() {
   const { user } = useAuth();
   const usersRole = useUsersRole();
+  const isAdmin = true;
 
   return (
     <div>
-       <Helmet>
-    <title>Dashboard</title>
-  </Helmet>
+      <Helmet>
+        <title>Dashboard</title>
+      </Helmet>
       <h1 className="text-3xl font-bold mb-8 lg:mb-4">
         Hello, {user.displayName}
       </h1>
@@ -28,48 +29,52 @@ function Dashboard() {
           content="See your Profile"
           to="/dashboard/profile"
         />
-        {usersRole === "admin" && (
+        {
+          isAdmin ? <></> :
+            <>
+              <Card
+                title="Admin Profile"
+                content="See your Profile"
+                to="/dashboard/adminProfile"
+              />
+              <Card
+                title="Manage Member"
+                content="Manage your users efficiently."
+                to="/dashboard/manage-member"
+              />
+              <Card
+                title="Agreement Request"
+                content="Agreement Request"
+                to="/dashboard/agreement-request"
+              />
+              <Card
+                title="Manage Coupons"
+                content="Manage the all of coupons"
+                to="/dashboard/coupons"
+              />
+            </>
+        }
+        <>
           <Card
-            title="Manage Member"
-            content="Manage your users efficiently."
-            to="/dashboard/manage-member"
+            title="Make Announcement"
+            content="See The Announcements page"
+            to="/dashboard/announcements"
           />
-        )}
-        <Card
-          title={usersRole === "admin" ? "Make Announcement" : "Announcement"}
-          content="See The Announcements page"
-          to="/dashboard/announcements"
-        />
+          <Card
+            title="Payment History"
+            content="See The Payment History"
+            to="/dashboard/payment-history"
+          />
+          <Card
+            title="Make Payment"
+            content="Make a Payment"
+            to="/dashboard/make-payment"
+          />
+        </>
+        <>
 
-        {usersRole === "member" && (
-          <>
-            <Card
-              title="Payment History"
-              content="See The Payment History"
-              to="/dashboard/payment-history"
-            />
-            <Card
-              title="Make Payment"
-              content="Make a Payment"
-              to="/dashboard/make-payment"
-            />
-          </>
-        )}
+        </>
 
-        {usersRole === "admin" && (
-          <>
-            <Card
-              title="Agreement Request"
-              content="Agreement Request"
-              to="/dashboard/agreement-request"
-            />
-            <Card
-              title="Manage Coupons"
-              content="Manage the all of coupons"
-              to="/dashboard/coupons"
-            />
-          </>
-        )}
       </div>
     </div>
   );

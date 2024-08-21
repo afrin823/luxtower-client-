@@ -6,7 +6,7 @@ function UserProfile({ user }) {
 
     return (
       <div className="shadow-md rounded-lg border p-4">
-        <div className="flex items-center">
+        <div className="flex items-center text-center">
           <img
             className="w-1/4 rounded-lg"
             src={user?.photoURL}

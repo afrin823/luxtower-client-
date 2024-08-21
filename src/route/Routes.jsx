@@ -12,6 +12,9 @@ import ControlPanel from "../Layout/ControlPanel/ControlPanel";
 import Profile from "../Components/Dashboard/Profile/Profile";
 import PrivateRoute from "../firebase/PrivetRoute";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import PaymentHistory from "../Components/Dashboard/PaymentHistory/PaymentHistory";
+import MakePayment from "../Components/Dashboard/MakePayment/MakePayment";
+import ManageMembers from "../Components/Dashboard/ManageMembers/ManageMembers";
 
   const router = createBrowserRouter([
     {
@@ -48,7 +51,9 @@ import Payment from "../pages/Dashboard/Payment/Payment";
     },
     {
       path: '/dashboard',
-      element: <ControlPanel></ControlPanel>,
+      element: <PrivateRoute>
+        <ControlPanel></ControlPanel>
+      </PrivateRoute>,
       children: [
         {
           path: '/dashboard',
@@ -58,6 +63,19 @@ import Payment from "../pages/Dashboard/Payment/Payment";
           path: '/dashboard/profile',
           element: <Profile></Profile>
         },
+        {
+          path: "/dashboard/payment-history",
+          element: <PaymentHistory></PaymentHistory>
+        },
+        {
+          path: "/dashboard/make-payment",
+          element: <MakePayment></MakePayment>
+        },
+        {
+          path: '/dashboard/manage-member',
+          element: <ManageMembers></ManageMembers>
+        }
+        ,
         {
           path: 'cart',
           element: <Cart></Cart>

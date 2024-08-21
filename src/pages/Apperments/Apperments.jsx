@@ -1,18 +1,18 @@
 import { Helmet } from "react-helmet-async";
 import ApartmentCard from "./ApartmentCard";
-import useAxiosSecure from "../../firebase/hook/useAuth/useAxiosSecure/useAxiosSecure";
 import Loader from "../../Components/Loader/Loader";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
 
 
 const Apperments = () => {
 
-    const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
 
     const { isPending, data } = useQuery({
         queryKey: ["apartment"],
         queryFn: async () => {
-          const res = await axiosSecure.get("/apartment");
+          const res = await axiosPublic.get("/apartment");
           return res.data;
         },
       });

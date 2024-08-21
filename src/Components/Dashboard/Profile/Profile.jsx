@@ -24,8 +24,8 @@ function Profile() {
       <Helmet>
         <title>Profile</title>
       </Helmet>
-      <h1 className="text-3xl font-bold mb-8 lg:mb-4">
-        Profile {user.displayName}
+      <h1 className="text-3xl text-center font-bold mb-8 lg:mb-4">
+        <u>Profile {user.displayName}</u>
       </h1>
       <UserProfile user={user} />
       {isPending ? <Loader /> : <Agreement apartment={apartment} />}
