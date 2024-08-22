@@ -4,12 +4,14 @@ import Swal from "sweetalert2";
 import useUsersRole from "../useUsersRole/useUsersRole";
 import { MdDashboardCustomize } from "react-icons/md";
 import useAuth from "../../firebase/hook/useAuth/useAuth";
+import useAdmin from "../../firebase/hook/useAuth/useAdmin";
 
 
 function DashboardNavbar() {
   const { logout } = useAuth();
   const navigate = useNavigate();
   const usersRole = useUsersRole();
+  const [isAdmin] = useAdmin();
 
   const handleLogout = () => {
     logout()
@@ -48,7 +50,9 @@ function DashboardNavbar() {
         </NavLink>
       </li>
    
-        <li>
+       {
+        isAdmin && (
+          <li>
           <NavLink
             to="/dashboard/manage-member"
             className="flex items-center space-x-3"
@@ -57,6 +61,8 @@ function DashboardNavbar() {
             <span>Manage Members</span>
           </NavLink>
         </li>
+        )
+       }
     
       <li>
         <NavLink
@@ -93,7 +99,9 @@ function DashboardNavbar() {
    
      
         <>
-          <li>
+          {
+            isAdmin &&  (
+              <li>
             <NavLink
               to="/dashboard/agreement-request"
               className="flex items-center space-x-3"
@@ -102,7 +110,11 @@ function DashboardNavbar() {
               <span>Agreement Requests</span>
             </NavLink>
           </li>
-          <li>
+            )
+          }
+         {
+          isAdmin && (
+            <li>
             <NavLink
               to="/dashboard/coupons"
               className="flex items-center space-x-3"
@@ -111,6 +123,8 @@ function DashboardNavbar() {
               <span>Manage Coupons</span>
             </NavLink>
           </li>
+          )
+         }
         </>
 
       <li>

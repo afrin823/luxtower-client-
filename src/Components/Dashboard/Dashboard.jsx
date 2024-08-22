@@ -1,22 +1,23 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../firebase/hook/useAuth/useAuth";
-import useUsersRole from "../useUsersRole/useUsersRole";
 import Card from "./Card";
 import { Helmet } from "react-helmet-async";
+import useAdmin from "../../firebase/hook/useAuth/useAdmin";
 
 function Dashboard() {
   const { user } = useAuth();
-  const usersRole = useUsersRole();
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
 
   return (
     <div>
       <Helmet>
         <title>Dashboard</title>
       </Helmet>
+      
       <h1 className="text-3xl font-bold mb-8 lg:mb-4">
         Hello, {user.displayName}
       </h1>
+      
       <div className="pb-10">
         <Link to="/" className="btn bg-gray-400 text-white link px-10 font-bold">
           Click here to go to Home Page
@@ -29,52 +30,44 @@ function Dashboard() {
           content="See your Profile"
           to="/dashboard/profile"
         />
-        {
-          isAdmin ? <></> :
-            <>
-              <Card
-                title="Admin Profile"
-                content="See your Profile"
-                to="/dashboard/adminProfile"
-              />
-              <Card
-                title="Manage Member"
-                content="Manage your users efficiently."
-                to="/dashboard/manage-member"
-              />
-              <Card
-                title="Agreement Request"
-                content="Agreement Request"
-                to="/dashboard/agreement-request"
-              />
-              <Card
-                title="Manage Coupons"
-                content="Manage the all of coupons"
-                to="/dashboard/coupons"
-              />
-            </>
-        }
-        <>
-          <Card
-            title="Make Announcement"
-            content="See The Announcements page"
-            to="/dashboard/announcements"
-          />
-          <Card
-            title="Payment History"
-            content="See The Payment History"
-            to="/dashboard/payment-history"
-          />
-          <Card
-            title="Make Payment"
-            content="Make a Payment"
-            to="/dashboard/make-payment"
-          />
-        </>
-        <>
 
-        </>
-
+        {isAdmin && (
+          <>
+            <Card
+              title="Manage Member"
+              content="Manage your users efficiently."
+              to="/dashboard/manage-member"
+            />
+            <Card
+              title="Agreement Request"
+              content="Agreement Request"
+              to="/dashboard/agreement-request"
+            />
+            <Card
+              title="Manage Coupons"
+              content="Manage all the coupons"
+              to="/dashboard/coupons"
+            />
+          </>
+        )}
+        
+        <Card
+          title={isAdmin === "admin" ? "Make Announcement" : "Announcement"}
+          content="See The Announcements page"
+          to="/dashboard/announcements"
+        />
+        
+        <Card
+          title="Payment History"
+          content="See The Payment History"
+          to="/dashboard/payment-history"
+        />
+        
+        <Card
+          title="Make Payment"
+          content="Make a Payment"
+          to="/dashboard/make-payment"
+        />
       </div>
     </div>
   );
