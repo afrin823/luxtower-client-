@@ -1,14 +1,14 @@
-import useAxiosSecure from "../../firebase/hook/useAuth/useAxiosSecure/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Components/Loader/Loader";
+import useAxiosPublic from "../../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
 
 const Cupon = () => {
-    const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
 
     const { isPending, data: coupon } = useQuery({
         queryKey: ["coupons"],
         queryFn: async () => {
-          const res = await axiosSecure("/coupon");
+          const res = await axiosPublic("/coupon");
           return res.data;
         },
       });
@@ -20,10 +20,10 @@ const Cupon = () => {
       <div className="bg-gray-100 py-12">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl animate-bounce font-bold text-gray-900 mb-4">
               Exclusive Coupons
             </h2>
-            <p className="text-lg text-gray-700 mb-8">
+            <p className="text-lg animate-bounce text-gray-700 mb-8">
               Discover our latest offers and save big!
             </p>
           </div>

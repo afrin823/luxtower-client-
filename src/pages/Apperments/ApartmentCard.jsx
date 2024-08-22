@@ -1,8 +1,8 @@
 import Swal from "sweetalert2";
 import useAuth from "../../firebase/hook/useAuth/useAuth";
 import { useNavigate } from "react-router-dom";
-import useAxiosSecure from "../../firebase/hook/useAuth/useAxiosSecure/useAxiosSecure";
 import { useState } from "react";
+import useAxiosPublic from "../../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
 
 const ApartmentCard = ({ apartments }) => {
   const { _id, apartmentNo, floorNo, image, blockName, rent, } = apartments;
@@ -12,7 +12,7 @@ const ApartmentCard = ({ apartments }) => {
 
   const { user } = useAuth();
   const navigate = useNavigate();
-  const axiosPublic = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
 
   const handleAgreement = (id) => {
     if (!user) return navigate("/signin");

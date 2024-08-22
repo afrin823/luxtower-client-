@@ -113,7 +113,7 @@ const Banner = () => {
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div
+                    <div 
                         className="hero min-h-screen"
                         style={{
                             backgroundImage: "url(https://img.freepik.com/premium-photo/duplex-house-luxury-home-with-lighting-ultra-modern-interior-exterior-design_510654-371.jpg)",

@@ -9,14 +9,14 @@ const Features = () => {
             <section className="py-6 sm:py-12 dark:bg-gray-100 dark:text-gray-800">
 	<div className="container p-6 mx-auto space-y-8">
 		<div className="space-y-2 text-center py-3">
-			<h2 data-aos="fade-left" className="text-4xl font-bold">What Can We Help You Find?
+			<h2 data-aos="fade-left" className="text-4xl animate-bounce font-bold">What Can We Help You Find?
             </h2>
-			<p data-aos="fade-left" className="font-serif text-sm dark:text-gray-600">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
+			<p data-aos="fade-left" className="font-serif text-sm  animate-bounce dark:text-gray-600">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
 		</div>
 		<div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
 			<article  data-aos="fade-right" className="flex flex-col dark:bg-gray-50 shadow-sm">
 				<a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum">
-				<PiHouseLine  className="object-cover text-sky-400 w-full h-24" />
+				<PiHouseLine  className="object-cover animate-pulse text-sky-400 w-full h-24" />
 				</a>
 				<div className="flex flex-col flex-1 p-6">
 					<a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a>
@@ -28,7 +28,7 @@ const Features = () => {
 			</article>
 			<article data-aos="fade-down-right" className="flex flex-col dark:bg-gray-50">
 				<a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum">
-					<FaBuilding  className="object-cover text-sky-400 w-full h-24 py-3" />
+					<FaBuilding  className="object-cover animate-pulse text-sky-400 w-full h-24 py-3" />
 				</a>
 				<div className="flex flex-col flex-1 p-6">
 					<a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a>
@@ -38,7 +38,7 @@ const Features = () => {
 			</article>
 			<article data-aos="fade-up-left" className="flex flex-col dark:bg-gray-50">
 				<a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum">
-				<RiBuilding2Line  className="object-cover text-sky-400 w-full h-24" />
+				<RiBuilding2Line  className="object-cover animate-pulse text-sky-400 w-full h-24" />
 				</a>
 				<div className="flex flex-col flex-1 p-6">
 					<a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a>

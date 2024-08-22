@@ -4,7 +4,7 @@ const Location = () => {
     return (
         <div className="container bg-base-200 mx-auto p-6">
         <section className="bg-white p-10">
-          <h2 className="text-4xl font-bold mb-8 text-center text-gray-800" data-aos="fade-left">Location and Directions</h2>
+          <h2 className="text-4xl font-bold mb-8 text-center animate-bounce text-gray-800" data-aos="fade-left">Location and Directions</h2>
   
           <div className="mb-8">
             <h3 className="text-2xl font-semibold text-gray-700 mb-4">Our Location</h3>

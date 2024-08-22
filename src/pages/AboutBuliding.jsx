@@ -4,7 +4,7 @@ const AboutBuliding = () => {
     return (
         <div>
             <div className="bg-base-200  text-center">
-                <h2 data-aos="fade-up" className="text-3xl w-3/12 mx-auto py-2 font-bold border-y-2">About The Building
+                <h2 data-aos="fade-up" className="text-3xl animate-bounce w-3/12 mx-auto py-2 font-bold border-y-2">About The Building
                 </h2>
 
             </div>
