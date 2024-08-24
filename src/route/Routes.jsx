@@ -7,7 +7,6 @@ import Resister from "../Components/Resister";
 import Apperments from "../pages/Apperments/Apperments";
 import Cart from "../Components/Dashboard/Cart";
 import Dashboard from "../Components/Dashboard/Dashboard";
-import Announcement from "../Components/Dashboard/Announcement/Announcement";
 import ControlPanel from "../Layout/ControlPanel/ControlPanel";
 import Profile from "../Components/Dashboard/Profile/Profile";
 import PrivateRoute from "../firebase/PrivetRoute";
@@ -16,6 +15,7 @@ import PaymentHistory from "../Components/Dashboard/PaymentHistory/PaymentHistor
 import MakePayment from "../Components/Dashboard/MakePayment/MakePayment";
 import ManageMembers from "../Components/Dashboard/ManageMembers/ManageMembers";
 import AdminRoute from "./AdminRoute";
+import Announcements from "../Components/Dashboard/Announcement/Announcements";
 
 const router = createBrowserRouter([
   {
@@ -83,10 +83,10 @@ const router = createBrowserRouter([
         path: 'cart',
         element: <Cart></Cart>
       },
-      {
-        path: '/dashboard/announcements',
-        element: <Announcement></Announcement>
-      },
+     {
+      path: '/dashboard/announcements',
+      element: <Announcements></Announcements>
+     },
       {
         path: '/dashboard/payment',
         element: <Payment></Payment>

@@ -19,10 +19,12 @@ const Apperments = () => {
     if (isPending) return <Loader />;
     
     return (
-        <div className="pt-24">
+        <div className="pt-28">
             <Helmet>
                 <title>Apperments</title>
             </Helmet>
+            <h2 data-aos="fade-up" className="text-3xl text-center animate-bounce w-2/12 mx-auto py-2 font-bold border-y-2">Apartments
+                </h2>
             <div className="bg-base-200 p-4">
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

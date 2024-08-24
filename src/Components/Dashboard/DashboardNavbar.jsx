@@ -1,7 +1,6 @@
 import { FaHome, FaUser, FaSignOutAlt, FaChartBar, FaCog } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import useUsersRole from "../useUsersRole/useUsersRole";
 import { MdDashboardCustomize } from "react-icons/md";
 import useAuth from "../../firebase/hook/useAuth/useAuth";
 import useAdmin from "../../firebase/hook/useAuth/useAdmin";
@@ -10,7 +9,6 @@ import useAdmin from "../../firebase/hook/useAuth/useAdmin";
 function DashboardNavbar() {
   const { logout } = useAuth();
   const navigate = useNavigate();
-  const usersRole = useUsersRole();
   const [isAdmin] = useAdmin();
 
   const handleLogout = () => {
@@ -71,7 +69,7 @@ function DashboardNavbar() {
         >
           <FaCog />
           <span>
-            {usersRole === "admin" ? "Make Announcement" : "Announcement"}
+            {isAdmin === "admin" ? "Make Announcement" : "Announcement"}
           </span>
         </NavLink>
       </li>
@@ -182,7 +180,7 @@ function DashboardNavbar() {
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-side lg:hidden z-10">
         <label htmlFor="my-drawer" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 bg-blue-500 text-white space-y-2 h-screen">
+        <ul className="menu p-4 w-80 bg-sky-300 text-white space-y-2 h-screen">
           {links}
         </ul>
       </div>

@@ -21,7 +21,7 @@ const AboutBuliding = () => {
 
                     </div>
                     <div className="flex  items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" data-aos="fade-down">
-                        <img src="https://assets-news.housing.com/news/wp-content/uploads/2020/06/22085026/All-about-duplex-house-image-01-shutterstock_58015144-compressed.jpg" alt="" className="object-contain  h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" />
+                        <img src="https://assets-news.housing.com/news/wp-content/uploads/2020/06/22085026/All-about-duplex-house-image-01-shutterstock_58015144-compressed.jpg" alt="" className="object-contain rounded-lg  h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" />
                     </div>
                 </div>
             </section>

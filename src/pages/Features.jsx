@@ -9,7 +9,7 @@ const Features = () => {
             <section className="py-6 sm:py-12 dark:bg-gray-100 dark:text-gray-800">
 	<div className="container p-6 mx-auto space-y-8">
 		<div className="space-y-2 text-center py-3">
-			<h2 data-aos="fade-left" className="text-4xl animate-bounce font-bold">What Can We Help You Find?
+			<h2 data-aos="fade-left" className="text-4xl animate-bounce font-bold ">What Can We Help You Find?
             </h2>
 			<p data-aos="fade-left" className="font-serif text-sm  animate-bounce dark:text-gray-600">Qualisque erroribus usu at, duo te agam soluta mucius.</p>
 		</div>

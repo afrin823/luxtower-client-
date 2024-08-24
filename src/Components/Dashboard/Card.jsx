@@ -8,7 +8,7 @@ function Card({ title, content, to }) {
         <h2 className="card-title">{title || ""}</h2>
         <p>{content || ""}</p>
         <div className="card-actions justify-end">
-          <Link to={to} className="btn btn-primary">
+          <Link to={to} className="btn bg-sky-400 text-white">
             Go
           </Link>
         </div>
