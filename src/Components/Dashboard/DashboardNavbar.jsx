@@ -2,17 +2,19 @@ import { FaHome, FaUser, FaSignOutAlt, FaChartBar, FaCog } from "react-icons/fa"
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { MdDashboardCustomize } from "react-icons/md";
-import useAuth from "../../firebase/hook/useAuth/useAuth";
 import useAdmin from "../../firebase/hook/useAuth/useAdmin";
+import { AuthContext } from "../../firebase/AuthProvider";
+import { useContext } from "react";
 
 
 function DashboardNavbar() {
-  const { logout } = useAuth();
+  const { logOut } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const [isAdmin] = useAdmin();
 
   const handleLogout = () => {
-    logout()
+    logOut()
       .then((res) => {
         console.log(res);
         Swal.fire({

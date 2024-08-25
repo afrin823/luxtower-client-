@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../firebase/hook/useAuth/useAxiosSecure/useAxiosSecure";
 import Loader from "../../Components/Loader/Loader";
 import RequestCard from "../RequestCard/RequestCard";
+import axios from "axios";
 
 function AgreementRequest() {
   const axiosSecure = useAxiosSecure();
@@ -10,14 +11,14 @@ function AgreementRequest() {
   const { isPending, data, refetch } = useQuery({
     queryKey: ["bookedApartments"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/bookedApartments");
+      const res = await axios.get("http://localhost:4000/bookedApartments");
       return res.data;
     },
   });
 
   const handleAccept = (id) => {
-    axiosSecure
-      .patch(`/bookedApartments/${id}`, { role: "member" })
+    axios
+      .patch(`http://localhost:4000/bookedApartments/${id}`, { role: "member" })
       .then((res) => {
         Swal.fire({
           title: res.data.message,
@@ -35,7 +36,7 @@ function AgreementRequest() {
   };
 
   const handleReject = (id) => {
-    axiosSecure      .patch(`/bookedApartments/${id}`, { role: "" })
+    axios      .patch(`http://localhost:4000/bookedApartments/${id}`, { role: "" })
       .then((res) => {
         console.log(res.data);
         Swal.fire({

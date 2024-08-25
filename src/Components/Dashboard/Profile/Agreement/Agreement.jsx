@@ -1,7 +1,13 @@
+
 /* eslint-disable react/prop-types */
 function Agreement({ apartment }) {
+  
+  const {_id, floor_no, block_name, apartment_no, rent } = apartment;
+
+ 
+
     // Replace with your actual date
-    console.log(apartment)
+    
   
     return (
       <div className="py-20">
@@ -14,7 +20,7 @@ function Agreement({ apartment }) {
               Agreement Accept Date:
             </label>
             <span id="agreementDate" className="text-lg font-semibold">
-              {apartment?.status ? apartment.status : "none"}
+              {/* {apartment.status} */}
             </span>
           </div>
           <div className="mt-4 border-t pt-4">
@@ -27,7 +33,7 @@ function Agreement({ apartment }) {
                   Floor Number:
                 </label>
                 <span id="floor" className="text-lg font-semibold">
-                  {apartment?.floor_no ? apartment.floor_no : "none"}
+                  {apartment.floor_no}
                 </span>
               </div>
               <div className="flex flex-col gap-2">
@@ -35,7 +41,7 @@ function Agreement({ apartment }) {
                   Block Number:
                 </label>
                 <span id="block" className="text-lg font-semibold">
-                  {apartment?.block_name ? apartment.block_name : "none"}
+                  {apartment.block_name}
                 </span>
               </div>
               <div className="flex flex-col gap-2">
@@ -43,7 +49,7 @@ function Agreement({ apartment }) {
                   Apartment Number:
                 </label>
                 <span id="roomNumber" className="text-lg font-semibold">
-                  {apartment?.apartment_no ? apartment.apartment_no : "none"}
+                  {apartment.apartment_no}
                 </span>
               </div>
             </div>

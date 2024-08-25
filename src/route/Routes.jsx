@@ -16,6 +16,7 @@ import MakePayment from "../Components/Dashboard/MakePayment/MakePayment";
 import ManageMembers from "../Components/Dashboard/ManageMembers/ManageMembers";
 import AdminRoute from "./AdminRoute";
 import Announcements from "../Components/Dashboard/Announcement/Announcements";
+import AgreementRequest from "../pages/AgreementRequest/AgreementRequest";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/make-payment",
         element: <MakePayment></MakePayment>
+      },
+      {
+        path: '/dashboard/agreement-request',
+        element: <AgreementRequest></AgreementRequest>
       },
       {
         path: '/dashboard/manage-member',

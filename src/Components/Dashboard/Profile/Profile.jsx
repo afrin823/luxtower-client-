@@ -11,13 +11,15 @@ function Profile() {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { isPending, data: apartment } = useQuery({
-    queryKey: ["bookedApartment"],
+
+  const { isPending, data } = useQuery({
+    queryKey: ["apartment"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/bookedApartments/${user.email}`);
+      const res = await axiosSecure.get(`http://localhost:4000/bookedApartments`);
       return res.data;
     },
   });
+  // console.log(apartment)
 
   return (
     <div>
@@ -28,7 +30,10 @@ function Profile() {
         <u>Profile {user.displayName}</u>
       </h1>
       <UserProfile user={user} />
-      {isPending ? <Loader /> : <Agreement apartment={apartment} />}
+      {data?.map((apartment) => (
+        <Agreement key={apartment._id} apartment={apartment} />
+      ))}
+
     </div>
   );
 }
