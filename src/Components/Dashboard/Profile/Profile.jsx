@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../firebase/hook/useAuth/useAuth";
 import useAxiosSecure from "../../../firebase/hook/useAuth/useAxiosSecure/useAxiosSecure";
 import UserProfile from "../UserProfile/UserProfile";
-import Loader from "../../Loader/Loader";
 import Agreement from "./Agreement/Agreement";
 import { Helmet } from "react-helmet-async";
 
@@ -19,7 +18,7 @@ function Profile() {
       return res.data;
     },
   });
-  // console.log(apartment)
+  console.log(isPending)
 
   return (
     <div>
