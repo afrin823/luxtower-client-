@@ -1,10 +1,15 @@
-import { FaHome, FaUser, FaSignOutAlt, FaChartBar, FaCog } from "react-icons/fa";
+import { FaHome, FaUser, FaChartBar } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { MdDashboardCustomize } from "react-icons/md";
+import { MdDashboardCustomize, MdOutlinePayments, MdPayments } from "react-icons/md";
 import useAdmin from "../../firebase/hook/useAuth/useAdmin";
 import { AuthContext } from "../../firebase/AuthProvider";
 import { useContext } from "react";
+import { TfiAnnouncement } from "react-icons/tfi";
+import { FaCodePullRequest } from "react-icons/fa6";
+import { RiCoupon4Fill } from "react-icons/ri";
+import { IoMdLogOut } from "react-icons/io";
+import { IoHome } from "react-icons/io5";
 
 
 function DashboardNavbar() {
@@ -49,6 +54,15 @@ function DashboardNavbar() {
           <span>Profile</span>
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/"
+          className="flex items-center space-x-3"
+        >
+          <IoHome />
+          <span>Home</span>
+        </NavLink>
+      </li>
    
        {
         isAdmin && (
@@ -69,20 +83,20 @@ function DashboardNavbar() {
           to="/dashboard/announcements"
           className="flex items-center space-x-3"
         >
-          <FaCog />
+          <TfiAnnouncement />
           <span>
             {isAdmin === "admin" ? "Make Announcement" : "Announcement"}
           </span>
         </NavLink>
       </li>
-     
+           
         <>
           <li>
             <NavLink
               to="/dashboard/payment-history"
               className="flex items-center space-x-3"
             >
-              <FaCog />
+              <MdOutlinePayments />
               <span>Payment History</span>
             </NavLink>
           </li>
@@ -91,7 +105,7 @@ function DashboardNavbar() {
               to="/dashboard/make-payment"
               className="flex items-center space-x-3"
             >
-              <FaCog />
+              <MdPayments />
               <span>Make Payment</span>
             </NavLink>
           </li>
@@ -106,7 +120,7 @@ function DashboardNavbar() {
               to="/dashboard/agreement-request"
               className="flex items-center space-x-3"
             >
-              <FaCog />
+              <FaCodePullRequest />
               <span>Agreement Requests</span>
             </NavLink>
           </li>
@@ -119,7 +133,7 @@ function DashboardNavbar() {
               to="/dashboard/coupons"
               className="flex items-center space-x-3"
             >
-              <FaCog />
+              <RiCoupon4Fill />
               <span>Manage Coupons</span>
             </NavLink>
           </li>
@@ -129,7 +143,7 @@ function DashboardNavbar() {
 
       <li>
         <div className="flex items-center space-x-3">
-          <FaSignOutAlt />
+          <IoMdLogOut />
           <span onClick={handleLogout}>Logout</span>
         </div>
       </li>

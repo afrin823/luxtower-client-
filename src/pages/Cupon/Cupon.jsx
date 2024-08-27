@@ -28,26 +28,28 @@ const Cupon = () => {
             </p>
           </div>
           <div data-aos="fade-up" className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {coupon?.map((coupon) => (
+            {coupon?.slice(0, 6).map((coupon) => (
               <div
                 key={coupon._id}
-                className="bg-white rounded-lg shadow-md overflow-hidden"
+                className="bg-white rounded-lg shadow-md h-64 w-full overflow-hidden"
               >
-                <div data-aos="fade-left" className="p-6">
+                <div data-aos="fade-left" className="p-6 ">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">
                     {coupon.description}
                   </h3>
-                  <p className="text-base text-gray-700 mb-4">
-                    Code: {coupon.code}
+               
+                  <p className="text-base  text-gray-700 mb-4">
+                    <span className="font-bold">Code:</span> {coupon.code}
                   </p>
-                  <p className="text-base text-gray-700 mb-4">
-                    Discount: {coupon.discount}%
+                  <p className="text-sm text-gray-600 mb-4">
+                    <span className="text-base font-bold ">Status:</span> <span className="badge badge-accent">{coupon.isActive ? "Active" : "Inactive"}</span>
                   </p>
-                  <p className="text-sm text-gray-600">
-                    Status: {coupon.isActive ? "Active" : "Inactive"}
+                  <p className="text-base font-bold text-gray-700 mb-2">
+                    Discount: <span className="badge badge-secondary">{coupon.discount}%</span>
                   </p>
+               
                 </div>
-                <div data-aos="fade-left" className="bg-gray-100 text-center py-3">
+                <div className="text-base font-bold p-2 text-center bg-sky-300 text-white"> 
                   {coupon.isActive && (
                     <a className="text-primary-500 font-semibold hover:text-primary-700 transition duration-300">
                       Available
@@ -56,7 +58,8 @@ const Cupon = () => {
                   {!coupon.isActive && (
                     <span className="text-gray-500 font-semibold">Expired</span>
                   )}
-                </div>
+                  </div>
+           
               </div>
             ))}
           </div>

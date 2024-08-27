@@ -4,7 +4,7 @@ function RequestCard({ apartment,handleAccept, handleReject }) {
       <div className="flex justify-center items-center bg-gradient-to-r from-gray-100 via-white to-gray-100 p-4">
         <div className="card w-full shadow-xl bg-white rounded-lg overflow-hidden">
           <div className="card-body p-6">
-            <h2 className="card-title text-3xl font-bold text-center mb-6 text-indigo-600">
+            <h2 className="card-title text-3xl font-bold text-center mb-6 text-sky-300">
               Agreement Request
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">

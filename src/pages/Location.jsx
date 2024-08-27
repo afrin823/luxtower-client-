@@ -4,34 +4,25 @@ const Location = () => {
     return (
         <div className="container bg-base-200 mx-auto p-6">
         <section className="bg-white p-10">
-          <h2 className="text-4xl font-bold mb-8 text-center animate-bounce w-5/12 mx-auto border-y-2 text-gray-800" data-aos="fade-left">Location &nbsp; and &nbsp;Directions</h2>
-  
-          <div className="mb-8">
-            <h3 className="text-2xl font-semibold text-gray-700 mb-4">Our Location</h3>
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <p className="text-lg text-gray-600">The Grand Plaza</p>
-              <p className="text-lg text-gray-600">1234 Main Street,</p>
-              <p className="text-lg text-gray-600">Metropolis, Country</p>
-            </div>
-          </div>
-  
-          <div className="mb-8">
-            <h3 className="text-2xl font-semibold text-gray-700 mb-4">Getting Here</h3>
+          <h2 data-aos="fade-right" className="text-4xl font-bold mb-6 text-center animate-bounce border-dotted w-5/12 mx-auto border-y-2 text-gray-800" >Location &nbsp; and &nbsp;Directions</h2>         
+
+          <div className="mb-8 text-center">
+       
+            <h3 data-aos="fade-right" className="text-2xl font-semibold mx-auto w-2/12 animate-bounce border-dotted border-y-2 border-gray-300 mb-4">Head Office</h3>
             <div className="space-y-4">
               <div>
-                <h4 className="text-xl font-medium text-gray-800">By Car</h4>
-                <p className="text-gray-600"><strong>From Downtown:</strong> Head north on Main Street. Continue straight for 2 miles. The Grand Plaza will be on your right.</p>
-                <p className="text-gray-600"><strong>From the Airport:</strong> Take the airport exit towards Highway 1. Merge onto Highway 1 and take Exit 12 for Main Street. Turn left onto Main Street and continue for 3 miles. The Grand Plaza will be on your left.</p>
+                <div data-aos="fade-right" className="text-base mb-2 ">
+                  LuxTower <br />
+                  Savar,Dhaka,Bangaldesh -- 1228 <br />
+                  Street No 132
+                </div>
+                <p data-aos="fade-right" className="text-gray-500 text-base">It sounds like you are describing a manufacturing site for Luxtower, located south of Milan, where the company has established a significant partnership with a historic carpentry workshop. This collaboration likely plays a crucial role in transforming Luxtower designs or materials into high-quality products, combining traditional craftsmanship with modern techniques. If you want a more detailed description or a specific focus, feel free to share more details!</p>
               </div>
   
-              <div>
-                <h4 className="text-xl font-medium text-gray-800">By Public Transportation</h4>
-                <p className="text-gray-600"><strong>Bus:</strong> Take Bus Route 15 and get off at the Main Street Stop. The Grand Plaza is a 5-minute walk from the bus stop.</p>
-                <p className="text-gray-600"><strong>Subway:</strong> Take the Blue Line to the Metropolis Central Station. From there, it’s a 10-minute walk to The Grand Plaza.</p>
-              </div>
+           
             </div>
           </div>
-          <div className="flex justify-center">
+          <div data-aos="fade-left" className="flex justify-center">
                 <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.6435114593187!2d90.4102138798014!3d23.79570562356292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c774a2484447%3A0x6424c6b057aff344!2sC%20House%20Milano%2C%20Bangladesh!5e0!3m2!1sen!2sbd!4v1722250694052!5m2!1sen!2sbd" 
                     className="w-full" 

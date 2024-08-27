@@ -76,7 +76,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/agreement-request',
-        element: <AgreementRequest></AgreementRequest>
+        element: <AdminRoute><AgreementRequest></AgreementRequest></AdminRoute>
       },
       {
         path: '/dashboard/manage-member',
@@ -91,7 +91,7 @@ const router = createBrowserRouter([
       ,
       {
         path: 'cart',
-        element: <Cart></Cart>
+        element: <AdminRoute><Cart></Cart></AdminRoute>
       },
      {
       path: '/dashboard/announcements',
