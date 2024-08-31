@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 function RequestCard({ apartment,handleAccept, handleReject }) {
+  const { _id, apartment_no, floor_no, image, block_name, rent, } = apartment;
+
     return (
       <div className="flex justify-center items-center bg-gradient-to-r from-gray-100 via-white to-gray-100 p-4">
         <div className="card w-full shadow-xl bg-white rounded-lg overflow-hidden">

@@ -8,7 +8,7 @@ import useAxiosPublic from "../../firebase/hook/useAuth/useAxiosPublic/useAxiosP
 function AgreementRequest() {
   const axiosPublic = useAxiosPublic();
 
-  const { isPending, data, refetch } = useQuery({
+  const { isPending, data = [], refetch } = useQuery({
     queryKey: ["bookedApartments"],
     queryFn: async () => {
       const res = await axiosPublic.get("/bookedApartments");
@@ -18,7 +18,7 @@ function AgreementRequest() {
 
   const handleAccept = (id) => {
     axios
-      .patch(`http://localhost:4000/bookedApartments/${id}`, { role: "admin" })
+      .patch(`http://localhost:4000/bookedApartments/${id}`)
       .then((res) => {
         Swal.fire({
           title: res.data.message,
@@ -36,7 +36,8 @@ function AgreementRequest() {
   };
 
   const handleReject = (id) => {
-    axios.patch(`http://localhost:4000/bookedApartments/${id}`, { role: "" })
+    axios
+      .patch(`http://localhost:4000/bookedApartments/${id}`)
       .then((res) => {
         console.log(res.data);
         Swal.fire({
@@ -53,16 +54,15 @@ function AgreementRequest() {
         });
       });
   };
+
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-8 lg:mb-4">
-        Agreement Request page
-      </h1>
+      <h1 className="text-3xl font-bold mb-8 lg:mb-4">Agreement Request page</h1>
       <div className="py-10">
         {isPending ? (
           <Loader />
         ) : data.length > 0 ? (
-          data?.map((apartment) => (
+          data.map((apartment) => (
             <RequestCard
               handleAccept={handleAccept}
               handleReject={handleReject}
