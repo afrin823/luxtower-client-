@@ -57,7 +57,7 @@ function AgreementRequest() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-8 lg:mb-4">Agreement Request page</h1>
+      <h1 className="text-3xl font-bold text-center mb-8 lg:mb-4  w-5/12 mx-auto animate-bounce">Agreement Request page</h1>
       <div className="py-10">
         {isPending ? (
           <Loader />

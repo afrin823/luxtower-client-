@@ -1,8 +1,9 @@
 import { IoHome } from "react-icons/io5";
 import useAuth from "../../firebase/hook/useAuth/useAuth";
-import useUsersRole from "../useUsersRole/useUsersRole";
+
 import Card from "./Card";
 import { Link } from "react-router-dom";
+import useUsersRole from "../../firebase/hook/useAuth/useUsersRole/useUsersRole";
 
 
 function Cart() {

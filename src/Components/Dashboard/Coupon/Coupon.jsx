@@ -19,21 +19,22 @@ function Coupon() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-8 lg:mb-4">Manage Coupons Page</h1>
+      <h1 className="text-3xl text-center w-5/12 mx-auto animate-bounce border-y-2 font-bold mb-8 lg:mb-4">Manage Coupons Page</h1>
       <div>
-        <div className="py-10">
+        <div className="py-8 text-center">
+
           <button
-            className="btn"
+            className="btn bg-sky-300 w-full text-lg"
             onClick={() => document.getElementById("my_modal_2").showModal()}
           >
-            Add Coupons
+            Add New Coupons
           </button>
           <Modal />
         </div>
         <div className="overflow-x-auto">
           <table className="table table-zebra border">
             {/* head */}
-            <thead className="bg-gray-500 text-white">
+            <thead className="bg-sky-300 text-black text-base">
               <tr>
                 <th></th>
                 <th>Coupons</th>

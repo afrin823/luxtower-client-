@@ -85,7 +85,7 @@ function DashboardNavbar() {
         >
           <TfiAnnouncement />
           <span>
-            {isAdmin === "admin" ? "Make Announcement" : "Announcement"}
+            {isAdmin ? "Make Announcement" : "Announcement"}
           </span>
         </NavLink>
       </li>

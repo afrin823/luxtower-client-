@@ -17,19 +17,19 @@ const ManageMembers = () => {
     // make admin
     const handleMakeAdmin = user => {
         axiosSecure.patch(`/users/admin/${user._id}`)
-        .then(res => {
-            console.log(res.data);
-            if (res.data.modifiedCount > 0){
-                refetch();
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: `${users.name} Admin Now!`,
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-            }
-        })
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${users.name} Admin Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
     }
     const handleDeleteUser = user => {
         Swal.fire({
@@ -40,21 +40,21 @@ const ManageMembers = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-             axiosSecure.delete(`/users/${user._id}`)
-             .then(res => {
-                if (res.data.deletedCount > 0){
-                    refetch();
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                      });
-                }
-             })
+                axiosSecure.delete(`/users/${user._id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
             }
-          });
+        });
     }
     return (
         <div>
@@ -63,10 +63,17 @@ const ManageMembers = () => {
                 <div className="text-3xl">Total Members : {users.length}</div>
             </div>
             <div className="overflow-x-auto">
-                <table className="table table-zebra w-full">
-                    {/* head */}
-                    <thead>
-                        <tr>
+                <table className="min-w-full text-xs">
+                    <colgroup>
+                        <col />
+                        <col />
+                        <col />
+                        <col />
+                        <col />
+                        <col className="w-24" />
+                    </colgroup>
+                    <thead className="dark:bg-gray-300">
+                        <tr className="text-left text-lg font-medium">
                             <th></th>
                             <th>Name</th>
                             <th>Email</th>
@@ -76,14 +83,14 @@ const ManageMembers = () => {
                     </thead>
                     <tbody>
                         {
-                            users.map((user, index) => <tr key={user._id}>
+                            users.map((user, index) => <tr key={user._id} className="border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-50 text-sm">
                                 <th>{index + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>
-                                   { user.role === 'admin' ? 'Admin' : <button onClick={() => handleMakeAdmin(user)}
-                                        className="btn btn-lg bg-sky-300">
-                                        <FaUsers className="text-white text-2xl" />
+                                    {user.role === 'admin' ? 'Admin' : <button onClick={() => handleMakeAdmin(user)}
+                                        className="btn btn-sm bg-sky-300">
+                                        <FaUsers className="text-white text-xl" />
                                     </button>}
                                 </td>
                                 <td>

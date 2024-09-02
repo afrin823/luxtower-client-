@@ -18,6 +18,7 @@ import AdminRoute from "./AdminRoute";
 import Announcements from "../Components/Dashboard/Announcement/Announcements";
 import AgreementRequest from "../pages/AgreementRequest/AgreementRequest";
 import Coupon from "../Components/Dashboard/Coupon/Coupon";
+import MakeAnnounce from "../Components/Dashboard/Announcement/MakeAnnounce";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
         element: <MakePayment></MakePayment>
       },
       {
+        path: "/dashboard/payment",
+        element: <Payment></Payment>
+      },
+      {
         path: '/dashboard/agreement-request',
         element: <AdminRoute><AgreementRequest></AgreementRequest></AdminRoute>
       },
@@ -87,6 +92,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/coupons',
         element: <Coupon></Coupon>
+      },
+      {
+        path: '/dashboard/make-announcement',
+        element: <MakeAnnounce></MakeAnnounce>
       }
       ,
       {

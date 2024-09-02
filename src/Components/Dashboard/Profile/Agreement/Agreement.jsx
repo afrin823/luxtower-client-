@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 function Agreement({ apartment }) {
   
-  const {_id, floor_no, block_name, apartment_no, rent } = apartment;
+  const {_id, floor_no, block_name, apartment_no, rent, accept_date } = apartment;
 
  
 
@@ -17,7 +17,7 @@ function Agreement({ apartment }) {
           </h2>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <label htmlFor="agreementDate" className="text-gray-700 font-medium">
-              Agreement Accept Date:
+              Agreement Accept Date: {apartment.accept_date}
             </label>
             <span id="agreementDate" className="text-lg font-semibold">
               {apartment?.status ? apartment.status : "none"}

@@ -22,18 +22,18 @@ function Announcements() {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-8 lg:mb-4 animate-bounce text-center mx-auto w-4/12 border-y-2">Announcements </h1>
-
-      {isAdmin == "admin" ? "" : isPending ? (
-        <Loader />
-      ) : (
+      {isAdmin && <MakeAnnounce />}
+    <h1 className="text-3xl font-bold text-center mb-8 lg:mb-4 py-12 animate-bounce">Announcements</h1>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">{isAdmin == "admin" ? "" : isPending ? (
+      <Loader />
+    ) : (
         announcements?.map((announcement) => (
-          <AnnouncementCard key={announcement._id} announcement={announcement} />
-        ))
-      )}
-
-      {isAdmin === "admin" && <MakeAnnounce />}
-    </div>
+        <AnnouncementCard  key={announcement._id} announcement={announcement} />
+      ))
+    )}
+</div>
+    
+  </div>
   );
 }
 

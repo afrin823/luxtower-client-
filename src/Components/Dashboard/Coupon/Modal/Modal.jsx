@@ -21,13 +21,11 @@ const Modal = () => {
               Add new Coupon
             </h1>
             <div className="mb-4">
-              <label htmlFor="code" className="block text-sm font-medium mb-2">
+              <label htmlFor="code" className="block text-start text-sm font-medium mb-2">
                 Coupon Code
               </label>
               <input
-                type="text"
-                id="code"
-                name="code"
+                type="text" id="code" name="code" placeholder="Coupon code"
                 className="shadow-sm rounded-md border px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 w-full"
                 required
                 value={code}
@@ -36,15 +34,12 @@ const Modal = () => {
             </div>
             <div className="mb-4">
               <label
-                htmlFor="discount"
-                className="block text-sm font-medium mb-2"
+                htmlFor="discount" className="block text-sm text-start font-medium mb-2"
               >
                 Discount (%)
               </label>
               <input
-                type="number"
-                id="discount"
-                name="discount"
+                type="number" id="discount" name="discount" placeholder="Discount"
                 className="shadow-sm rounded-md border px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 w-full"
                 required
                 min="0"
@@ -54,14 +49,12 @@ const Modal = () => {
             </div>
             <div className="mb-4">
               <label
-                htmlFor="description"
-                className="block text-sm font-medium mb-2"
+                htmlFor="description" className="block text-sm font-medium  mb-2 text-start"
               >
                 Description
               </label>
               <textarea
-                id="description"
-                name="description"
+                id="description" name="description" placeholder="Description"
                 className="shadow-sm rounded-md border px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 w-full"
                 rows="4"
                 required
@@ -71,22 +64,18 @@ const Modal = () => {
             </div>
             <div className="mb-4">
               <label
-                htmlFor="isActive"
-                className="block text-sm font-medium mb-2"
+                htmlFor="isActive" className="block text-md font-medium mb-2 "
               >
                 Active
               </label>
               <input
-                type="checkbox"
-                id="isActive"
-                name="isActive"
-                className="mr-2"
+                type="checkbox" id="isActive" name="isActive" className="mr-2 text-start"
                 value={isActive}
                 onChange={(e) => setIsActive(e.target.checked)}
               />
               <span>This coupon is currently active</span>
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn bg-sky-300 text-white w-full">
               Submit
             </button>
           </form>
