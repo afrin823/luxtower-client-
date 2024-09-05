@@ -49,7 +49,7 @@ function Coupon() {
                 <tr key={coupon._id}>
                   <th>{index + 1}</th>
                   <td>{coupon.code}</td>
-                  <td>{coupon.discount}</td>
+                  <td>{coupon.discount}%</td>
                   <td>
                     {coupon.isActive ? (
                       <p className="text-green-500">Active</p>

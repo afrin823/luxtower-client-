@@ -49,7 +49,7 @@ const Cupon = () => {
                   </p>
                
                 </div>
-                <div className="text-base font-bold p-2 text-center bg-sky-300 text-white"> 
+                <div className="text-base sticky bottom-0 font-bold p-2 text-center bg-sky-300 text-white"> 
                   {coupon.isActive && (
                     <a className="text-primary-500 font-semibold hover:text-primary-700 transition duration-300">
                       Available

@@ -1,7 +1,11 @@
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { Helmet } from "react-helmet-async";
+import CheckoutFrom from "./CheckoutFrom";
 
-
+const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const Payment = () => {
+ 
     return (
         <div>
             <Helmet>
@@ -9,7 +13,10 @@ const Payment = () => {
             </Helmet>
                 <div>
                     <h1 className="text-3xl font-bold mb-8 lg:mb-4">Payment </h1>
-                    <div className="flex items-center justify-center bg-gray-100 py-10">
+                    <Elements stripe={stripePromise}>
+                    <CheckoutFrom></CheckoutFrom>
+                    </Elements>
+                    {/* <div className="flex items-center justify-center bg-gray-100 py-10">
                         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                             <h1 className="text-2xl font-bold mb-6 text-center">
                                 Payment Process
@@ -77,7 +84,7 @@ const Payment = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                
             </div>
         </div>
