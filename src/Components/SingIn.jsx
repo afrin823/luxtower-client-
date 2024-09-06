@@ -7,8 +7,8 @@ import regitser from "../../public/regitser.json";
 import { AuthContext } from "../firebase/AuthProvider";
 import Lottie from "lottie-react";
 import { Helmet } from "react-helmet-async";
-import SocialLogin from "./useUsersRole/SocialLogin/SocialLogin";
 import useAxiosPublic from "../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
+import SocialLogin from "./SocialLogin/SocialLogin";
 
 const SignIn = () => {
   const [setSigninError] = useState("");

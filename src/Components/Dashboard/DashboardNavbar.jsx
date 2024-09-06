@@ -2,7 +2,6 @@ import { FaHome, FaUser, FaChartBar } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { MdDashboardCustomize, MdOutlinePayments, MdPayments } from "react-icons/md";
-import useAdmin from "../../firebase/hook/useAuth/useAdmin";
 import { AuthContext } from "../../firebase/AuthProvider";
 import { useContext } from "react";
 import { TfiAnnouncement } from "react-icons/tfi";
@@ -10,13 +9,14 @@ import { FaCodePullRequest } from "react-icons/fa6";
 import { RiCoupon4Fill } from "react-icons/ri";
 import { IoMdLogOut } from "react-icons/io";
 import { IoHome } from "react-icons/io5";
+import useUsersRole from "../../firebase/hook/useAuth/useUsersRole/useUsersRole";
 
 
 function DashboardNavbar() {
   const { logOut } = useContext(AuthContext);
 
   const navigate = useNavigate();
-  const [isAdmin] = useAdmin();
+  const usersRole = useUsersRole();
 
   const handleLogout = () => {
     logOut()
@@ -65,7 +65,7 @@ function DashboardNavbar() {
       </li>
    
        {
-        isAdmin && (
+        usersRole === "admin" &&(
           <li>
           <NavLink
             to="/dashboard/manage-member"
@@ -85,36 +85,38 @@ function DashboardNavbar() {
         >
           <TfiAnnouncement />
           <span>
-            {isAdmin ? "Make Announcement" : "Announcement"}
+            {usersRole === "admin" ? "Make Announcement" : "Announcement"}
           </span>
         </NavLink>
       </li>
            
+      {usersRole === "member" && (
         <>
-          <li>
-            <NavLink
-              to="/dashboard/payment-history"
-              className="flex items-center space-x-3"
-            >
-              <MdOutlinePayments />
-              <span>Payment History</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/make-payment"
-              className="flex items-center space-x-3"
-            >
-              <MdPayments />
-              <span>Make Payment</span>
-            </NavLink>
-          </li>
-        </>
+        <li>
+          <NavLink
+            to="/dashboard/payment-history"
+            className="flex items-center space-x-3"
+          >
+            <MdOutlinePayments />
+            <span>Payment History</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/dashboard/make-payment"
+            className="flex items-center space-x-3"
+          >
+            <MdPayments />
+            <span>Make Payment</span>
+          </NavLink>
+        </li>
+      </>
+      )}
    
      
         <>
           {
-            isAdmin &&  (
+           usersRole === "admin" &&  (
               <li>
             <NavLink
               to="/dashboard/agreement-request"
@@ -127,7 +129,7 @@ function DashboardNavbar() {
             )
           }
          {
-          isAdmin && (
+          usersRole === "admin" && (
             <li>
             <NavLink
               to="/dashboard/coupons"

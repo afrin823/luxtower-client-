@@ -1,17 +1,18 @@
 import useAuth from "../../firebase/hook/useAuth/useAuth";
 import Card from "./Card";
 import { Helmet } from "react-helmet-async";
-import useAdmin from "../../firebase/hook/useAuth/useAdmin";
+import useUsersRole from "../../firebase/hook/useAuth/useUsersRole/useUsersRole";
+
 
 function Dashboard() {
   const { user } = useAuth();
-  const [isAdmin, isAdminLoading] = useAdmin();
+  const usersRole = useUsersRole();
 
-  if (isAdminLoading) {
-    return <p>Loading...</p>; // Display a loading state while checking admin status
-  }
+  // if (isLoading) {
+  //   return <Loader></Loader>; // Display a loading state while checking admin status
+  // }
 
-  console.log("isAdmin value:", isAdmin); // Debugging check
+  console.log("isAdmin value:", usersRole); // Debugging check
 
   return (
     <div>
@@ -36,7 +37,7 @@ function Dashboard() {
           to="/dashboard/profile"
         />
 
-        {isAdmin && (
+        {usersRole === "admin" &&(
           <>
             <Card
               data-aos="fade-up"
@@ -61,12 +62,13 @@ function Dashboard() {
 
         <Card
           data-aos="fade-up"
-          title={isAdmin ? "Make Announcement" : "Announcement"}
+          title={usersRole === "admin" ? "Make Announcement" : "Announcement"}
           content="See The Announcements page"
           to="/dashboard/announcements"
         />
-
-        <Card
+        {usersRole === "member" &&(
+          <>
+             <Card
           data-aos="fade-left"
           title="Payment History"
           content="See The Payment History"
@@ -78,7 +80,9 @@ function Dashboard() {
           title="Make Payment"
           content="Make a Payment"
           to="/dashboard/make-payment"
-        />
+        /></>
+        )}
+     
       </div>
     </div>
   );

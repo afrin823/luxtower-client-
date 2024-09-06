@@ -5,9 +5,9 @@ import signUp from "../../public/signUp.json"
 import Lottie from "lottie-react";
 import { Helmet } from "react-helmet-async";
 import Loader from "./Loader/Loader";
-import SocialLogin from "./useUsersRole/SocialLogin/SocialLogin";
 import useAuth from "../firebase/hook/useAuth/useAuth";
 import useAxiosPublic from "../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
+import SocialLogin from "./SocialLogin/SocialLogin";
 
 const Resister = () => {
 

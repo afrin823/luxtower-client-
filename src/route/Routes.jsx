@@ -14,11 +14,12 @@ import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../Components/Dashboard/PaymentHistory/PaymentHistory";
 import MakePayment from "../Components/Dashboard/MakePayment/MakePayment";
 import ManageMembers from "../Components/Dashboard/ManageMembers/ManageMembers";
-import AdminRoute from "./AdminRoute";
 import Announcements from "../Components/Dashboard/Announcement/Announcements";
 import AgreementRequest from "../pages/AgreementRequest/AgreementRequest";
 import Coupon from "../Components/Dashboard/Coupon/Coupon";
 import MakeAnnounce from "../Components/Dashboard/Announcement/MakeAnnounce";
+import AdminRoute from "../firebase/hook/useAuth/routes/AdminRoute/AdminRoute";
+import MembersRoute from "../firebase/hook/useAuth/routes/AdminRoute/MembersRoute/MembersRoute";
 
 const router = createBrowserRouter([
   {
@@ -61,41 +62,69 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>
+        element: <PrivateRoute>
+          <Dashboard></Dashboard>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/profile',
-        element: <Profile></Profile>
+        element: <PrivateRoute>
+          <Profile></Profile>
+        </PrivateRoute>
       },
       {
         path: "/dashboard/payment-history",
-        element: <PaymentHistory></PaymentHistory>
+        element: <PrivateRoute>
+          <MembersRoute>
+          <PaymentHistory></PaymentHistory>
+          </MembersRoute>
+        </PrivateRoute>
       },
       {
         path: "/dashboard/make-payment",
-        element: <MakePayment></MakePayment>
+        element: <PrivateRoute>
+          <MembersRoute>
+          <MakePayment></MakePayment>
+          </MembersRoute>
+        </PrivateRoute>
       },
       {
         path: "/dashboard/payment",
-        element: <Payment></Payment>
+        element: <PrivateRoute>
+          <MembersRoute>
+          <Payment></Payment>
+          </MembersRoute>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/agreement-request',
-        element: <AdminRoute><AgreementRequest></AgreementRequest></AdminRoute>
+        element: <PrivateRoute>
+          <AdminRoute><AgreementRequest></AgreementRequest></AdminRoute>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/manage-member',
-        element: <AdminRoute>
+        element: <PrivateRoute>
+          <AdminRoute>
           <ManageMembers></ManageMembers>
         </AdminRoute>
+        </PrivateRoute> 
       },
       {
         path: '/dashboard/coupons',
-        element: <Coupon></Coupon>
+        element: <PrivateRoute>
+          <AdminRoute>
+          <Coupon></Coupon>
+          </AdminRoute>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/make-announcement',
-        element: <MakeAnnounce></MakeAnnounce>
+        element: <PrivateRoute>
+          <AdminRoute>
+          <MakeAnnounce></MakeAnnounce>
+          </AdminRoute>
+        </PrivateRoute>
       }
       ,
       {
@@ -104,11 +133,17 @@ const router = createBrowserRouter([
       },
      {
       path: '/dashboard/announcements',
-      element: <Announcements></Announcements>
+      element: <PrivateRoute>
+        <Announcements></Announcements>
+      </PrivateRoute>
      },
       {
         path: '/dashboard/payment',
-        element: <Payment></Payment>
+        element: <PrivateRoute>
+          <MembersRoute>
+          <Payment></Payment>
+          </MembersRoute>
+        </PrivateRoute>
       }
     ]
   }

@@ -3,50 +3,79 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../firebase/hook/useAuth/useAxiosSecure/useAxiosSecure";
 import { useLocation } from "react-router-dom";
 
-const CheckoutFrom = () => {
+const CheckoutForm = () => {
     const [error, setError] = useState('');
+    const [clientSecret, setClientSecret] = useState('');
+    const [isProcessing, setIsProcessing] = useState(false);
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
-    
+    const location = useLocation();
+    const { userInfo, month, floor_no, block_name, apartment_no, rent } = location.state;
 
     useEffect(() => {
-        axiosSecure.post('/create-payment-intent')
-    }, [])
-
+        // Create PaymentIntent on component mount
+        axiosSecure.post('/create-payment-intent', { amount: rent })
+            .then(response => {
+                setClientSecret(response.data.clientSecret);
+            })
+            .catch(error => {
+                console.error('Error creating payment intent:', error);
+            });
+    }, [axiosSecure, rent]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (!stripe || !elements) {
-            return
+            return;
         }
-        const card = elements.getElement(CardElement)
+        
+        const card = elements.getElement(CardElement);
 
         if (card === null) {
-            return
+            return;
         }
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: 'card',
-            card
-        })
-        if (error) {
-            console.log('Payment error', error);
-            setError(error.message)
-        } else {
-            console.log('Payment Method', paymentMethod);
-            setError('');
-        }
-        //confirm payment
-        // const {} = await stripe.confirmCardPayment(clientSecret, {
-        //     payment_method: {
-        //         card: card,
-        //         billing_details: {
 
-        //         }
-        //     }
-        // })
-    }
+        setIsProcessing(true);
+
+        const { error: paymentError, paymentMethod } = await stripe.createPaymentMethod({
+            type: 'card',
+            card,
+        });
+
+        if (paymentError) {
+            console.log('Payment error', paymentError);
+            setError(paymentError.message);
+            setIsProcessing(false);
+            return;
+        }
+
+        console.log('Payment Method', paymentMethod);
+        setError('');
+
+        // Confirm payment
+        const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name: userInfo.name,  // Replace with actual user info
+                    email: userInfo.email,  // Replace with actual user info
+                },
+            },
+        });
+
+        if (confirmError) {
+            console.log('Confirmation error', confirmError);
+            setError(confirmError.message);
+        } else if (paymentIntent.status === 'succeeded') {
+            console.log('Payment succeeded:', paymentIntent);
+            // Handle successful payment here (e.g., save payment details, navigate to a success page, etc.)
+        }
+
+        setIsProcessing(false);
+    };
+
     return (
         <form onSubmit={handleSubmit}>
             <CardElement
@@ -65,12 +94,12 @@ const CheckoutFrom = () => {
                     },
                 }}
             />
-            <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe}>
-                Pay
+            <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe || isProcessing}>
+                {isProcessing ? 'Processing...' : 'Pay'}
             </button>
-            <p className="text-red-600">{error}</p>
+            {error && <p className="text-red-600">{error}</p>}
         </form>
     );
 };
 
-export default CheckoutFrom;
+export default CheckoutForm;
