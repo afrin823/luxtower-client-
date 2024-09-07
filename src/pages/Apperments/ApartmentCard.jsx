@@ -4,20 +4,25 @@ import Swal from "sweetalert2";
 import useAxiosPublic from "../../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
 
 const ApartmentCard = ({ apartments }) => {
-  const { _id, image, apartment_no, block_name, floor_no, rent } = apartments;
+  const { _id, image, apartment_no, request_date, block_name, floor_no, rent } = apartments;
 
   const { user } = useAuth();
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
 
   const handleAgreement = (id) => {
-    if (!user) return navigate("/login");
+    if (!user) return navigate("/signin");
 
     if (user) {
       const apartmentInfo = {
         name: user.displayName,
         email: user.email,
         apartment_id: id,
+        apartment_no: apartment_no,
+        block_name: block_name,
+        floor_no: floor_no,
+        rent: rent,
+        request_date: request_date,
       };
 
       console.log(apartmentInfo);

@@ -6,7 +6,7 @@ import useAxiosPublic from "../../../firebase/hook/useAuth/useAxiosPublic/useAxi
 function Payment() {
   const location = useLocation();
   const { userInfo, month, floor_no, block_name, apartment_no, rent } =
-    location.state || {}; // Safely destructure location.state
+    location.state || {}; // Ensure location.state is defined
 
   const axiosPublic = useAxiosPublic();
   const [coupon, setCoupon] = useState("");
@@ -73,7 +73,7 @@ function Payment() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000));
     } catch (error) {
-      // 
+      console.error("Payment failed. Please try again.");
     } finally {
       setIsProcessing(false);
     }
@@ -90,30 +90,39 @@ function Payment() {
             Payment Process
           </h1>
           <div className="space-y-4">
-            <div className="flex justify-between">
-              <span className="font-semibold">Email:</span>
-              <span>{userInfo.email}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="font-semibold">Floor:</span>
-              <span>{floor_no}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="font-semibold">Block Name:</span>
-              <span>{block_name}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="font-semibold">Apartment No:</span>
-              <span>{apartment_no}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="font-semibold">Month:</span>
-              <span>{month}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="font-semibold">Rent:</span>
-              <span>${apartmentRent.toFixed(2)}</span>
-            </div>
+            {/* Ensure userInfo is defined */}
+            {userInfo && (
+              <>
+                <div className="flex justify-between">
+                  <span className="font-semibold">Email:</span>
+                  <span>{userInfo.email}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-semibold">Floor:</span>
+                  <span>{floor_no}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-semibold">Block Name:</span>
+                  <span>{block_name}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-semibold">Apartment No:</span>
+                  <span>{apartment_no}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-semibold">Month:</span>
+                  <span>{month}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-semibold">Rent:</span>
+                  <span>
+                    {Number.isFinite(apartmentRent)
+                      ? `$${apartmentRent.toFixed(2)}`
+                      : "N/A"}
+                  </span>
+                </div>
+              </>
+            )}
             {discount > 0 && (
               <div className="flex justify-between text-green-500">
                 <span className="font-semibold">Discount:</span>
@@ -155,7 +164,7 @@ function Payment() {
                 >
                   {isProcessing
                     ? "Processing..."
-                    : `Pay $${apartmentRent.toFixed(2)}`}
+                    : `Pay $${Number.isFinite(apartmentRent) ? apartmentRent.toFixed(2) : "0.00"}`}
                 </button>
               </div>
             </div>

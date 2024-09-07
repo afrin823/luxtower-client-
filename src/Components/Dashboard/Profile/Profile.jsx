@@ -11,18 +11,16 @@ function Profile() {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
 
-
-  const { isPending, data: apartment = [], isLoading } = useQuery({
-    queryKey: ["apartment"],
+  const { isLoading, data: apartments = {} } = useQuery({
+    queryKey: ["apartments"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/bookedApartments/${user.email}`);
+      console.log(res.data);
       return res.data;
     },
   });
-  console.log(isPending)
-  if(isLoading){
-    return <Loader></Loader>
-  }
+
+
 
   return (
     <div>
@@ -33,12 +31,14 @@ function Profile() {
         <u>Profile {user.displayName}</u>
       </h1>
       <UserProfile user={user} />
-      {apartment?.map((apartment) => (
+      {/* {apartment?.map((apartment) => (
         <Agreement key={apartment._id} apartment={apartment} />
-      ))}
+      ))} */}
+      {isLoading ? <Loader /> : <Agreement key={apartments._id} apartments={apartments} />}
 
     </div>
   );
 }
+
 
 export default Profile;

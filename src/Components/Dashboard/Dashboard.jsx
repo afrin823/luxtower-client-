@@ -8,12 +8,6 @@ function Dashboard() {
   const { user } = useAuth();
   const usersRole = useUsersRole();
 
-  // if (isLoading) {
-  //   return <Loader></Loader>; // Display a loading state while checking admin status
-  // }
-
-  console.log("isAdmin value:", usersRole); // Debugging check
-
   return (
     <div>
       <Helmet>
