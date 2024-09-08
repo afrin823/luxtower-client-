@@ -10,12 +10,13 @@ function Agreement({ apartments }) {
         </h2>
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <span id="agreementDate" className="text-lg font-semibold">
+           Status: {status || "None"}
+          </span>
           <label htmlFor="agreementDate" className="text-gray-700 font-medium">
             Agreement Accept Date: {request_date || "N/A"}
           </label>
-          <span id="agreementDate" className="text-lg font-semibold">
-            {status || "None"}
-          </span>
+       
         </div>
 
         <div className="mt-4 border-t pt-4">

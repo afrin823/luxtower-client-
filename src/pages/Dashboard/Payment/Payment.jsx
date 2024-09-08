@@ -61,9 +61,9 @@ function Payment() {
       .post("/create-payment-intent", paymentInfo)
       .then((res) => {
         console.log(res.data);
-        const redirectURL = res.data.GatewayPageURL;
-        if (redirectURL) {
-          window.location.replace(redirectURL);
+        const url = res.data.GatewayPageURL;
+        if (url) {
+          window.location.replace(url);
         }
       })
       .catch((error) => {
