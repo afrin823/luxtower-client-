@@ -11,15 +11,12 @@ const Apartments = () => {
         queryKey: ["apartment"],
         queryFn: async () => {
             const res = await axiosPublic.get("/apartment");
-            return res.data; // Ensure this is returning the data in the format you expect
+            return res.data;
         },
     });
 
     if (isLoading) return <Loader />;
 
-    // console.log(data); // Debugging: Check the structure of the data
-
-    // Check if data is an array; if not, adjust the access based on the API response structure
     const apartments = Array.isArray(data) ? data : data?.apartments; 
 
     return (

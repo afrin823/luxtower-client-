@@ -16,9 +16,9 @@ function Dashboard() {
 
       <h1
         data-aos="fade-left"
-        className="text-3xl animate-bounce font-bold text-center border-b-4 border-gray-700 w-2/12 mx-auto mb-8 lg:mb-4"
+        className="text-3xl animate-bounce font-bold text-center mb-8 lg:mb-4"
       >
-        Hello, {user.displayName}
+        Hello {user.displayName}
       </h1>
 
       <div className="pb-10"></div>

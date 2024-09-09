@@ -4,53 +4,63 @@ import useAxiosPublic from "../../../firebase/hook/useAuth/useAxiosPublic/useAxi
 import Loader from "../../Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import  payment from "../../../../public/payemt.json";
+import Lottie from "lottie-react";
 
 
 const MakePayment = () => {
-    const axiosPublic = useAxiosPublic();
-    const {user} = useAuth();
-    const navigate = useNavigate();
-    const [month, setMonth] = useState(null);
+  const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [month, setMonth] = useState(null);
 
 
-    const { isPending, data: apartment } = useQuery({
-        queryKey: ["apartment"],
-        queryFn: async () => {
-          const res = await axiosPublic.get(`/bookedApartments/${user.email}`);
-          return res.data;
-        },
-      });
-      const handleSubmit = (e) => {
-        e.preventDefault()
+  const { isPending, data: apartment } = useQuery({
+    queryKey: ["apartment"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/bookedApartments/${user.email}`);
+      return res.data;
+    },
+  });
+  const handleSubmit = (e) => {
+    e.preventDefault()
 
-        const submitPayment = {
-            userInfo: {name: user.displayName, email: user.email},
-            month,
-            floor_no: apartment.floor_no,
-            block_name: apartment.block_name,
-            apartment_no: apartment.apartment_no,
-            rent: apartment.rent,
-        };
-        // 
-        navigate("/dashboard/payment", { state: submitPayment });
+    const submitPayment = {
+      userInfo: { name: user.displayName, email: user.email },
+      month,
+      floor_no: apartment.floor_no,
+      block_name: apartment.block_name,
+      apartment_no: apartment.apartment_no,
+      rent: apartment.rent,
+    };
+    // 
+    navigate("/dashboard/payment", { state: submitPayment });
 
-      }
-    return (
-        <div>
-        <h1 className="text-3xl font-bold mb-8 lg:mb-4">Make Payment page </h1>
-  
-        {isPending ? (
-          <Loader />
-        ) : (
-          <div>
-            <form
+  }
+  return (
+    <div>
+      <h1 className="text-3xl font-bold text-center mb-8 lg:mb-4">Make Payment</h1>
+
+      {isPending ? (
+        <Loader />
+      ) : (
+        <div className="grid max-w-screen-xl grid-cols-1 gap-8 px-8 py-16 mx-auto rounded-lg md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 dark:bg-gray-100 dark:text-gray-800">
+          <div className="flex flex-col justify-between">
+            <div className="space-y-2">
+              <h2 className="text-4xl font-bold leading-tight lg:text-3xl">Member Information</h2>
+              <div className="dark:text-gray-600">Vivamus in nisl metus? Phasellus.</div>
+            </div>
+            {/* <img src="assets/svg/doodle.svg" alt="" className="p-6 h-52 md:h-64" />
+             */}
+             <Lottie animationData={payment}  className="h-52 md:h-64 lg:h-full" />
+          </div>
+          <form
               onSubmit={handleSubmit}
               className="space-y-4 shadow-2xl py-10 px-6 rounded-lg"
             >
-              <h2 className="text-3xl font-semibold">Member Information</h2>
               <div className="flex flex-col">
                 <label htmlFor="email" className="text-sm font-medium mb-2">
-                  Member Email
+                  Email
                 </label>
                 <input
                   type="text"
@@ -139,10 +149,11 @@ const MakePayment = () => {
                 Submit Payment
               </button>}
             </form>
-          </div>
-        )}
-      </div>
-    );
+        </div>
+
+      )}
+    </div>
+  );
 };
 
 export default MakePayment;
