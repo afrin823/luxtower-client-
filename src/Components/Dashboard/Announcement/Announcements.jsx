@@ -20,14 +20,17 @@ function Announcements() {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-8 lg:mb-4 text-center">
-        Announcements Page
+        Announcements
       </h1>
+      <p className="text-center w-10/12 mx-auto text-sm text-gray-500 pb-6">
+      We are excited to announce the launch of our new project, a groundbreaking initiative that promises to bring unique value and elevate our standards. Stay tuned for more updates as we embark on this exciting journey together!
+      </p>
       {usersRole === "admin" && <MakeAnnounce />}
       {usersRole !== "admin" ? (
         isLoading ? (
           <Loader />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {announcements?.map((announcement) => (
               <AnnouncementCard
                 key={announcement._id}

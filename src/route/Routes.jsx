@@ -20,6 +20,8 @@ import Coupon from "../Components/Dashboard/Coupon/Coupon";
 import MakeAnnounce from "../Components/Dashboard/Announcement/MakeAnnounce";
 import AdminRoute from "../firebase/hook/useAuth/routes/AdminRoute/AdminRoute";
 import MembersRoute from "../firebase/hook/useAuth/routes/AdminRoute/MembersRoute/MembersRoute";
+import SuccessPayment from "../pages/Dashboard/Payment/SuccessPayment";
+import FailPayment from "../pages/Dashboard/Payment/FailPayment";
 
 const router = createBrowserRouter([
   {
@@ -96,6 +98,15 @@ const router = createBrowserRouter([
           </MembersRoute>
         </PrivateRoute>
       },
+      {
+        path: "/dashboard/success-payment/:tranId",
+        element: <SuccessPayment></SuccessPayment>
+      },
+      {
+        path: "/dashboard/fail-payment/:tranId",
+        element: <FailPayment></FailPayment>
+      }
+      ,
       {
         path: '/dashboard/agreement-request',
         element: <PrivateRoute>

@@ -60,8 +60,7 @@ function Payment() {
     axiosPublic
       .post("/create-payment-intent", paymentInfo)
       .then((res) => {
-        console.log(res.data);
-        const url = res.data.GatewayPageURL;
+        const url = res.data.url;
         if (url) {
           window.location.replace(url);
         }

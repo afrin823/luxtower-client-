@@ -4,8 +4,6 @@ import useAxiosPublic from "../../../firebase/hook/useAuth/useAxiosPublic/useAxi
 import Loader from "../../Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import  payment from "../../../../public/payemt.json";
-import Lottie from "lottie-react";
 
 
 const MakePayment = () => {
@@ -44,16 +42,8 @@ const MakePayment = () => {
       {isPending ? (
         <Loader />
       ) : (
-        <div className="grid max-w-screen-xl grid-cols-1 gap-8 px-8 py-16 mx-auto rounded-lg md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 dark:bg-gray-100 dark:text-gray-800">
-          <div className="flex flex-col justify-between">
-            <div className="space-y-2">
-              <h2 className="text-4xl font-bold leading-tight lg:text-3xl">Member Information</h2>
-              <div className="dark:text-gray-600">Vivamus in nisl metus? Phasellus.</div>
-            </div>
-            {/* <img src="assets/svg/doodle.svg" alt="" className="p-6 h-52 md:h-64" />
-             */}
-             <Lottie animationData={payment}  className="h-52 md:h-64 lg:h-full" />
-          </div>
+        <div className=" max-w-screen-xl gap-8 px-8 py-16 mx-auto rounded-lg md:px-12 lg:px-16 xl:px-32 dark:bg-gray-100 dark:text-gray-800">
+      
           <form
               onSubmit={handleSubmit}
               className="space-y-4 shadow-2xl py-10 px-6 rounded-lg"
@@ -145,9 +135,9 @@ const MakePayment = () => {
                   <option value="december">December</option>
                 </select>
               </div>
-            {  <button type="submit"  className="btn btn-primary">
+           <button type="submit"  className="btn bg-sky-300 w-full">
                 Submit Payment
-              </button>}
+              </button>
             </form>
         </div>
 

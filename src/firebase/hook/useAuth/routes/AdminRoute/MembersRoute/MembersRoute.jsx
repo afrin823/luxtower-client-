@@ -3,7 +3,7 @@ import useAuth from "../../../useAuth";
 import useAxiosPublic from "../../../useAxiosPublic/useAxiosPublic";
 import Loader from "../../../../../../Components/Loader/Loader";
 import { Navigate } from "react-router-dom";
-
+import PropTypes from "prop-types";  // Import PropTypes
 
 function MembersRoute({ children }) {
   const { loading, user } = useAuth();
@@ -24,5 +24,10 @@ function MembersRoute({ children }) {
 
   return <Navigate to="/" />;
 }
+
+// Add propTypes for validation
+MembersRoute.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default MembersRoute;

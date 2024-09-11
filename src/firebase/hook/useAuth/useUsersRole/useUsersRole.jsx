@@ -4,10 +4,11 @@ import useAxiosPublic from "../useAxiosPublic/useAxiosPublic";
 import Loader from "../../../../Components/Loader/Loader";
 
 function useUsersRole() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const axiosPublic = useAxiosPublic();
   const { isPending, data } = useQuery({
     queryKey: ["usersRole"],
+    enabled: !loading,
     queryFn: async () => {
       const res = await axiosPublic.get(`/usersRole?email=${user.email}`);
       return res.data;
