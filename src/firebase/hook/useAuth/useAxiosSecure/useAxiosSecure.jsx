@@ -4,7 +4,7 @@ import useAuth from "../useAuth";
 
 const axiosSecure = axios.create({
 
-  baseURL: "http://localhost:4000",
+  baseURL: "https://buliding-management-server.vercel.app",
 });
 function useAxiosSecure() {
   const navigate = useNavigate();

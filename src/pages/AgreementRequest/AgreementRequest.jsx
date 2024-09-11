@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import Loader from "../../Components/Loader/Loader";
 import RequestCard from "../RequestCard/RequestCard";
-import axios from "axios";
 import useAxiosPublic from "../../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
 
 function AgreementRequest() {
@@ -17,8 +16,8 @@ function AgreementRequest() {
   });
 
   const handleAccept = (id) => {
-    axios
-      .patch(`http://localhost:4000/bookedApartments/${id}`)
+    axiosPublic
+      .patch(`/bookedApartments/${id}`)
       .then((res) => {
         Swal.fire({
           title: res.data.message,
@@ -36,8 +35,8 @@ function AgreementRequest() {
   };
 
   const handleReject = (id) => {
-    axios
-      .patch(`http://localhost:4000/bookedApartments/${id}`)
+    axiosPublic
+      .patch(`/bookedApartments/${id}`)
       .then((res) => {
         console.log(res.data);
         Swal.fire({

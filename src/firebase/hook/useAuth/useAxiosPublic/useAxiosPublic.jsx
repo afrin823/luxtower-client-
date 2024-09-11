@@ -1,9 +1,10 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-    baseURL: 'http://localhost:4000',
+    baseURL: 'https://buliding-management-server.vercel.app',
     timeout: 1000,
     headers: {'X-Custom-Header': 'foobar'}
+    
   
 })
 
