@@ -1,13 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
+import useAuth from "../../../firebase/hook/useAuth/useAuth";
+import useAxiosSecure from "../../../firebase/hook/useAuth/useAxiosSecure/useAxiosSecure";
 
 const PaymentHistory = () => {
-    const axiosPublic = useAxiosPublic();
+    const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
 
     const { data: payments = [], isLoading, isError, error } = useQuery({
         queryKey: ['payments'],
         queryFn: async () => {
-            const res = await axiosPublic(`/payments`);
+            const res = await axiosSecure(`/payments/${user.email}`);
             return res.data;
         }
     });
@@ -22,17 +24,17 @@ const PaymentHistory = () => {
 
     return (
         <div>
-            <h2>Payment History ({payments.length})</h2>
+            <h2 className="text-3xl text-center font-bold text-gray-700 py-4">Total Payment History ({payments.length})</h2>
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
                     {/* head */}
-                    <thead>
+                    <thead className="bg-sky-100 rounded-md">
                         <tr>
                             <th></th>
-                            <th>Payment ID</th>
-                            <th>Amount</th>
-                            <th>Date</th>
-                            <th>Payment Method</th>
+                            <th className="text-xl">Transaction ID</th>
+                            <th className="text-xl">Status</th>
+                            <th className="text-xl">Month</th>
+                            <th className="text-xl">Amount</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,9 +42,9 @@ const PaymentHistory = () => {
                             <tr key={payment._id}>
                                 <th>{index + 1}</th>
                                 <td>{payment.tranjectionId}</td>
-                                <td>{payment.paymentStatus}</td> {/* Changed from paymentStatus */}
-                                <td>{payment.date}</td> {/* Changed from paymentStatus */}
-                                <td>{payment.paymentMethod}</td>
+                                <td>{payment.paymentStatus ? 'Paid' : 'Pending'}</td>
+                                <td>{payment.paymentInfo.month}</td>
+                                <td>${payment.paymentInfo.apartmentRent}</td>
                             </tr>
                         ))}
                     </tbody>
