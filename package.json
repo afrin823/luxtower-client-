@@ -29,7 +29,8 @@
     "stripe": "^16.9.0",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.12.1",
-    "swiper": "^11.1.4"
+    "swiper": "^11.1.4",
+    "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

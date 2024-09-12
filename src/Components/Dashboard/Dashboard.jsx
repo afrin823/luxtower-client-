@@ -1,11 +1,10 @@
-import useAuth from "../../firebase/hook/useAuth/useAuth";
 import { Helmet } from "react-helmet-async";
 import useUsersRole from "../../firebase/hook/useAuth/useUsersRole/useUsersRole";
 import { Link } from "react-router-dom";
+import DashboadTextAnimation from "./DashboadTextAnimation";
 
 
 function Dashboard() {
-  const { user } = useAuth();
   const usersRole = useUsersRole();
 
   return (
@@ -16,9 +15,9 @@ function Dashboard() {
 
       <h1
         data-aos="fade-left"
-        className="text-3xl animate-bounce font-bold text-center mb-8 lg:mb-4"
+        className="text-3xl font-bold text-center mb-8 lg:mb-4"
       >
-        Hi, Welcome {user.displayName}
+        <DashboadTextAnimation></DashboadTextAnimation>
       </h1>
 
       <div className="pb-10"></div>

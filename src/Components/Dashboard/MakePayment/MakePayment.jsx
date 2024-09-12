@@ -4,6 +4,7 @@ import useAxiosPublic from "../../../firebase/hook/useAuth/useAxiosPublic/useAxi
 import Loader from "../../Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import MakePaytext from "./MakePaytext";
 
 
 const MakePayment = () => {
@@ -37,7 +38,9 @@ const MakePayment = () => {
   }
   return (
     <div>
-      <h1 className="text-3xl font-bold text-center mb-8 lg:mb-4">Make Payment</h1>
+      <h1 className="text-3xl font-bold text-center mb-8 lg:mb-4">
+        <MakePaytext></MakePaytext>
+      </h1>
 
       {isPending ? (
         <Loader />

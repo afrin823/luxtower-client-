@@ -27,14 +27,12 @@ function Profile() {
       <Helmet>
         <title>Profile</title>
       </Helmet>
-      <h1 className="text-3xl text-center font-bold ">
-        <u>Profile {user.displayName}</u>
-      </h1>
-     
+        
       <UserProfile user={user} />
       {/* {apartment?.map((apartment) => (
         <Agreement key={apartment._id} apartment={apartment} />
       ))} */}
+      
       {isLoading ? <Loader /> : <Agreement key={apartments._id} apartments={apartments} />}
         </div>
   
