@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FiEye } from "react-icons/fi";
 import { GoEyeClosed } from "react-icons/go";
@@ -9,17 +9,21 @@ import Lottie from "lottie-react";
 import { Helmet } from "react-helmet-async";
 import useAxiosPublic from "../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
 import SocialLogin from "./SocialLogin/SocialLogin";
+import useAuth from "../firebase/hook/useAuth/useAuth";
 
 const SignIn = () => {
-  const [setSigninError] = useState("");
-  const [setSigninSuccessful] = useState("");
+  const [signinError, setSigninError] = useState("");
+  const [signinSuccessful, setSigninSuccessful] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const location = useLocation();
   const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
+
+  const {user} = useAuth();
+
+  if (user) return navigate("/");
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -51,7 +55,14 @@ const SignIn = () => {
         axiosPublic.post("/jwt", user, { withCredentials: true })
           .then((res) => {
             if (res.data.success) {
-              navigate(location?.state ? location.state : "/");
+              Swal.fire({
+                title: "Sign-In Successful",
+                text: "User successfully signed in",
+                icon: "success",
+              });
+              setSigninSuccessful("Successfully signed in");
+              navigate("/");
+
             }
           })
           .catch((err) => {
@@ -63,13 +74,6 @@ const SignIn = () => {
             });
             setSigninError("Failed to authenticate");
           });
-
-        Swal.fire({
-          title: "Sign-In Successful",
-          text: "User successfully signed in",
-          icon: "success",
-        });
-        setSigninSuccessful("Successfully signed in");
       })
       .catch((error) => {
         console.error(error);
@@ -148,7 +152,6 @@ const SignIn = () => {
         </p>
         <SocialLogin></SocialLogin>
       </form>
-
     </div>
   );
 };

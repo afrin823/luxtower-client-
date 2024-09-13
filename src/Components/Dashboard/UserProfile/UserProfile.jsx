@@ -10,7 +10,7 @@ function UserProfile({ user }) {
           <img
             className="w-1/6 rounded-full mx-auto animate-pulse"
             src={user?.photoURL}
-            alt={user?.displayName}
+            alt="display image"
           />
            <h3 className="text-2xl font-semibold md:text-3xl text-gray-300">
               {user?.displayName}

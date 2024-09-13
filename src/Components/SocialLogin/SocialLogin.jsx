@@ -7,31 +7,7 @@ import { FaGooglePlusG } from "react-icons/fa";
 
 function SocialLogin() {
       
-  //-------------------------------
 
-  // const handleGooglrSignIn = () => {
-  //   signInWithGoogle()
-  //     .then(result => {
-  //       console.log(result.user);
-  //       const userInfo = {
-  //           result: result.user?.email,
-  //           name: result.user?.displayName
-  //       }
-  //       axiosPublic.post('/users', userInfo)
-  //       .then(res => {
-  //           console.log(res.data);
-  //           navigate('/')
-  //       })
-  //       .catch((error) => {
-  //           console.error(error);
-  //           Swal.fire({
-  //             title: "Something went wrong. Try later.",
-  //             icon: "warning",
-  //           });
-  //         });
-  //     })
-    
-  // };
 
   const { signInWithGoogle } = useAuth();
   const axiosPublic = useAxiosPublic();

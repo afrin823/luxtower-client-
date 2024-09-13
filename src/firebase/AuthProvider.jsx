@@ -1,8 +1,5 @@
-import { createContext, useEffect, useState } from "react";
-
-export const AuthContext = createContext(null);
+import { createContext, useEffect, useState, useMemo } from "react";
 import PropTypes from "prop-types";
-
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -15,7 +12,7 @@ import {
 import auth from "./firebase.config";
 import useAxiosPublic from "./hook/useAuth/useAxiosPublic/useAxiosPublic";
 
-//--------------------------------------
+export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -23,63 +20,61 @@ const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   const axiosPublic = useAxiosPublic();
 
-  //---------------------------------
-  const createUser = (email, password) => {
+  const createUser = async (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    try {
+      return await createUserWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.error("Error creating user: ", error);
+      // Handle the error appropriately
+    } finally {
+      setLoading(false);
+    }
   };
 
-  //----------------------
   const updateUserProfile = (name, image) => {
+    if (!user) return Promise.reject("No user is signed in.");
     return updateProfile(user, {
       displayName: name,
       photoURL: image,
     });
   };
-  //--------------------------------
 
-  const signInUser = (email, password) => {
+  const signInUser = async (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
-  };
-  //----------------------
-  const signInWithGoogle = () => {
-    setLoading(true);
-    return signInWithPopup(auth, googleProvider);
-  };
-  //---------------
-  const logOut = () => {
-    setLoading(true);
-    return signOut(auth);
+    try {
+      return await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.error("Error signing in: ", error);
+      // Handle the error appropriately
+    } finally {
+      setLoading(false);
+    }
   };
 
-  //---------------------------
+  const signInWithGoogle = async () => {
+    setLoading(true);
+    try {
+      return await signInWithPopup(auth, googleProvider);
+    } catch (error) {
+      console.error("Error signing in with Google: ", error);
+      // Handle the error appropriately
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // useEffect(() => {
-  //   const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-  //     //  console.log("currenct users", currentUser);
-  //     setUser(currentUser);
-  //     if (currentUser) {
-  //       //get token and store client
-  //       const userInfo = {email: currentUser.email}
-  //       axiosPublic.post('/jwt', userInfo)
-  //       .then(res => {
-  //         if (res.data.token){
-  //             localStorage.setItem('access-token', res.data.token)
-  //         }
-  //       }
-         
-  //       )
-  //     } else {
-  //       localStorage.removeItem('access-token');
-  //     }
-  //     setLoading(false);
-
-  //   });
-  //   return () => {
-  //     unSubscribe();
-  //   };
-  // }, [axiosPublic]);
+  const logOut = async () => {
+    setLoading(true);
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Error logging out: ", error);
+      // Handle the error appropriately
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -88,22 +83,19 @@ const AuthProvider = ({ children }) => {
         const userInfo = { email: currentUser.email };
         axiosPublic.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
-            console.log("the token is", res.data);
             localStorage.setItem("access-token", res.data.token);
           }
         });
       } else {
-
         localStorage.removeItem("access-token");
       }
-      console.log("Absorbing user", currentUser);
       setLoading(false);
     });
+
     return () => unSubscribe();
   }, [axiosPublic]);
 
-  //----------------------------------
-  const authInFo = {
+  const authInFo = useMemo(() => ({
     user,
     loading,
     setUser,
@@ -113,15 +105,17 @@ const AuthProvider = ({ children }) => {
     signInWithGoogle,
     updateUserProfile,
     auth,
-  };
+  }), [user, loading]);
 
   return (
-    <AuthContext.Provider value={authInFo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={authInFo}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
 export default AuthProvider;
 
 AuthProvider.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };
