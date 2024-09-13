@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import useAxiosPublic from "../../../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
+import axiosRetry from 'axios-retry'; // Import axios-retry
 
 function Payment() {
   const location = useLocation();
@@ -9,6 +10,8 @@ function Payment() {
     location.state || {}; // Ensure location.state is defined
 
   const axiosPublic = useAxiosPublic();
+  axiosRetry(axiosPublic, { retries: 3, retryDelay: axiosRetry.exponentialDelay }); // Add retry logic
+  
   const [coupon, setCoupon] = useState("");
   const [message, setMessage] = useState("");
   const [discount, setDiscount] = useState(0);
@@ -17,7 +20,7 @@ function Payment() {
   const { isPending, data } = useQuery({
     queryKey: ["coupon"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/coupon");
+      const res = await axiosPublic.get("/coupon", { timeout: 5000 }); // Increased timeout to 5000ms (5 seconds)
       return res.data;
     },
   });
@@ -58,7 +61,7 @@ function Payment() {
     };
 
     axiosPublic
-      .post("/create-payment-intent", paymentInfo)
+      .post("/create-payment-intent", paymentInfo, { timeout: 5000 }) // Set timeout to 5000ms here as well
       .then((res) => {
         const url = res.data.url;
         if (url) {
@@ -89,7 +92,6 @@ function Payment() {
             Payment Process
           </h1>
           <div className="space-y-4">
-            {/* Ensure userInfo is defined */}
             {userInfo && (
               <>
                 <div className="flex justify-between">
@@ -116,7 +118,7 @@ function Payment() {
                   <span className="font-semibold">Rent:</span>
                   <span>
                     {Number.isFinite(apartmentRent)
-                      ? `$${apartmentRent.toFixed(2)}`
+                      ? `${apartmentRent.toFixed(2)}`
                       : "N/A"}
                   </span>
                 </div>
