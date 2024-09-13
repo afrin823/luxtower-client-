@@ -1,17 +1,15 @@
 import Typewriter from 'typewriter-effect';
-
-const MakePaytext = () => {
+const PaymentText = () => {
     return (
         <div>
-            <Typewriter
+                <Typewriter
                 options={{
-                    strings: ['Make Payment', 'Create Payment'],
+                    strings: ['Payment', 'Payment Process'],
                     autoStart: true,
                     loop: true,
-                }}
-            />
+                }}/>
         </div>
     );
 };
 
-export default MakePaytext;
+export default PaymentText;

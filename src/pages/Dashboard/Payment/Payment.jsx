@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import useAxiosPublic from "../../../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
 import axiosRetry from 'axios-retry'; // Import axios-retry
+import PaymentText from "./PaymentText";
 
 function Payment() {
   const location = useLocation();
@@ -85,12 +86,11 @@ function Payment() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-8 lg:mb-4">Payment page</h1>
+      <h1 className="text-3xl text-center font-bold mb-8 lg:mb-4">
+        <PaymentText></PaymentText>
+         </h1>
       <div className="flex items-center justify-center bg-gray-100 py-10">
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-          <h1 className="text-2xl font-bold mb-6 text-center">
-            Payment Process
-          </h1>
           <div className="space-y-4">
             {userInfo && (
               <>
@@ -141,7 +141,7 @@ function Payment() {
                 value={coupon}
                 onChange={(e) => setCoupon(e.target.value)}
               />
-              <button onClick={handleApplyCoupon} className="btn btn-primary">
+              <button onClick={handleApplyCoupon} className="btn bg-sky-300 text-gray-600">
                 {isPending ? "Pending..." : "Apply"}
               </button>
             </div>
