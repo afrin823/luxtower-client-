@@ -7,15 +7,13 @@ import Location from "./Location";
 import Property from "./Property";
 
 
-
-const Home = () => {
-
+const Home = () => { 
     return (
         <div>
             <Helmet>
                 <title>Home</title>
             </Helmet>
-            <Banner></Banner>        
+            <Banner></Banner>    
             <Features></Features>
             <Property></Property>
             <AboutBuliding></AboutBuliding>

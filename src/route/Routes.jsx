@@ -22,6 +22,9 @@ import AdminRoute from "../firebase/hook/useAuth/routes/AdminRoute/AdminRoute";
 import MembersRoute from "../firebase/hook/useAuth/routes/AdminRoute/MembersRoute/MembersRoute";
 import SuccessPayment from "../pages/Dashboard/Payment/SuccessPayment";
 import FailPayment from "../pages/Dashboard/Payment/FailPayment";
+import AboutUs from "../pages/AboutUs/AboutUs";
+import ViewApartment from "../pages/Apperments/ViewApartment";
+import Chat from "../Components/Dashboard/Chat";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +53,26 @@ const router = createBrowserRouter([
         element:
           <PrivateRoute>
             <Apperments></Apperments>
+          </PrivateRoute>
+
+      },
+      {
+        path: '/chat',
+        element:
+          <Chat></Chat>
+
+      },
+      {
+        path: '/viewApartment/:id',
+        element: <PrivateRoute><ViewApartment /></PrivateRoute>,
+      
+      },
+ 
+      {
+        path: '/about',
+        element:
+          <PrivateRoute>
+            <AboutUs></AboutUs>
           </PrivateRoute>
 
       }

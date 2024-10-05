@@ -31,6 +31,9 @@ const Navbar = () => {
       <NavLink className="mr-5" to="/">
         Home
       </NavLink>
+      <NavLink className="mr-5" to="/about">
+        About US
+      </NavLink>
       {user && (
         <>
           <NavLink className="mr-5" to="/apartments">

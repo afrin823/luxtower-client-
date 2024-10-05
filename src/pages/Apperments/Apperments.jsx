@@ -1,3 +1,4 @@
+
 import { Helmet } from "react-helmet-async";
 import ApartmentCard from "./ApartmentCard";
 import Loader from "../../Components/Loader/Loader";
@@ -32,7 +33,7 @@ const Apartments = () => {
             </h2>
             <div className="bg-base-200 p-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {apartments?.slice(0, 6).map((apartment) => (
+                    {apartments?.slice(0, 9).map((apartment) => (
                         <ApartmentCard key={apartment._id} apartments={apartment} />
                     ))}
                 </div>

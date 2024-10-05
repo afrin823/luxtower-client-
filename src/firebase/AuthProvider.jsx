@@ -33,8 +33,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateUserProfile = (name, image) => {
-    if (!user) return Promise.reject("No user is signed in.");
-    return updateProfile(user, {
+    return updateProfile(auth.currentUser,  {
       displayName: name,
       photoURL: image,
     });
@@ -75,6 +74,8 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
+
+
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
