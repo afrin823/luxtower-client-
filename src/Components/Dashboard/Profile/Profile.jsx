@@ -28,7 +28,7 @@ function Profile() {
         <title>Profile</title>
       </Helmet>
         
-      <UserProfile user={user} />
+      <UserProfile />
       {/* {apartment?.map((apartment) => (
         <Agreement key={apartment._id} apartment={apartment} />
       ))} */}

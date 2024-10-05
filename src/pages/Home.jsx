@@ -4,20 +4,22 @@ import Banner from "./Banner";
 import Cupon from "./Cupon/Cupon";
 import Features from "./Features";
 import Location from "./Location";
+import Property from "./Property";
 
 
 
 const Home = () => {
- 
+
     return (
         <div>
-              <Helmet>
+            <Helmet>
                 <title>Home</title>
             </Helmet>
-            <Banner></Banner>
+            <Banner></Banner>        
             <Features></Features>
-            <AboutBuliding></AboutBuliding>   
-            <Cupon></Cupon>        
+            <Property></Property>
+            <AboutBuliding></AboutBuliding>
+            <Cupon></Cupon>
             <Location></Location>
 
         </div>

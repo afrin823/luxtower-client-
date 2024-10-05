@@ -2,11 +2,13 @@ import { useContext } from "react";
 import { BsBuildings } from "react-icons/bs";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../firebase/AuthProvider";
+import useAuth from "../firebase/hook/useAuth/useAuth";
 
 
 const Navbar = () => {
 
-  const { user, logOut } = useContext(AuthContext);
+  const { logOut } = useContext(AuthContext);
+  const {user} = useAuth();
   //--------------------------
   // console.log(theme);
   //--------------------
