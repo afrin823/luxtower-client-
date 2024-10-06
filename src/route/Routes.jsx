@@ -25,6 +25,7 @@ import FailPayment from "../pages/Dashboard/Payment/FailPayment";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import ViewApartment from "../pages/Apperments/ViewApartment";
 import Chat from "../Components/Dashboard/Chat";
+import UpdateApartment from "../pages/Apperments/UpdateApartment";
 
 const router = createBrowserRouter([
   {
@@ -65,7 +66,10 @@ const router = createBrowserRouter([
       {
         path: '/viewApartment/:id',
         element: <PrivateRoute><ViewApartment /></PrivateRoute>,
-      
+      },
+      {
+        path: '/update/:id',
+        element: <PrivateRoute><UpdateApartment /></PrivateRoute>,
       },
  
       {

@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 import useAxiosPublic from "../../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -22,7 +22,7 @@ const ViewApartment = () => {
     console.log(data);
 
     // Now you can safely access apartment properties
-    const { apartment_no, image, rent, block_name,request_date, floor_no } = data;
+    const { apartment_no, _id, image, rent, block_name,request_date, floor_no } = data;
 
     return (
         <div className="pt-24 w-[90%] mx-auto">
@@ -30,8 +30,8 @@ const ViewApartment = () => {
         <div className="w-full  bg-slate-100 rounded-xl">
             <img className="w-full  mx-auto p-8" src={image} alt="" />
         </div>
-        <div className="cols-span-1">
-            <h2 className="text-4xl font-bold mb-2">Block Name: {block_name}</h2>
+        <div className="cols-span-1 mt-2 md:mt-6 lg:mt-8">
+            <h2 className="text-4xl font-bold mb-2 ">Block Name: {block_name}</h2>
             <h3 className="text-xl mb-3">Apartment Number: {apartment_no}</h3>
             <hr />
             <h2 className="text-xl my-2 font-bold">Request Date: {request_date}</h2>
@@ -40,6 +40,9 @@ const ViewApartment = () => {
             <hr />
             <p className="my-2 text-justify"><span className="font-bold">Rent:</span> {rent}</p>
             <hr />
+            <Link to={`/update/${_id}`}>
+            <button className="btn bg-sky-400 text-white ">Update Apartment</button>
+            </Link>
            
           
         </div>
