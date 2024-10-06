@@ -1,4 +1,4 @@
-# React + Vite
+# <img src="https://i.ibb.co.com/rGcbX1q/Screenshot-8.png"> LuxTower
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
