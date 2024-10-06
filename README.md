@@ -1,8 +1,5 @@
-# <img src="https://i.ibb.co.com/rGcbX1q/Screenshot-8.png"> LuxTower
+# LuxTower
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Apartment Update System is a web-based application designed to manage and update apartment details efficiently. It allows users to retrieve apartment information and update key details such as apartment number, block name, floor number, rent, and request date. Using modern web technologies like React, React Query, and Axios, the system ensures seamless data fetching and updating with real-time feedback to users. The application also integrates form validation and user-friendly notifications for a smooth experience.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<img src="https://i.ibb.co.com/KyS41Qr/screencapture-localhost-5173-2024-10-06-16-43-11-1.png">
