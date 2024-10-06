@@ -58,9 +58,10 @@ const ApartmentCard = ({ apartments }) => {
                 <div className="rounded-md overflow-hidden">
                     <Link  to={`/viewApartment/${_id}`}>
                     
-                        <img
+                        <img title="View Apartment"
+                        
                             data-aos="fade-up"
-                            className="w-full h-48 object-cover"
+                            className="w-full h-48 object-cover hover:bg-sky-700"
                             src={image}
                             alt={`Apartment No ${apartment_no}`} // Added alt text
                         />

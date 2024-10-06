@@ -1,16 +1,17 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
 
 const UpdateApartment = () => {
+    const axiosPublic = useAxiosPublic();
   const { id } = useParams();
 
   // Fetch apartment data using useQuery
   const { data: apartmentData, isLoading } = useQuery({
     queryKey: ["apartment", id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:4000/apartment/${id}`);
+      const res = await axiosPublic.get(`/apartment/${id}`);
       return res.data;
     },
   });
@@ -18,8 +19,8 @@ const UpdateApartment = () => {
   // Handle form update using useMutation
   const updateMutation = useMutation({
     mutationFn: async (newApartment) => {
-      const res = await axios.patch(
-        `http://localhost:4000/apartment/update/${id}`,
+      const res = await axiosPublic.patch(
+        `/apartment/update/${id}`,
         newApartment
       );
       return res.data;

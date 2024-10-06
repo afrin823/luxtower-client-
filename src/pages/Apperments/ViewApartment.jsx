@@ -1,7 +1,6 @@
-import { Link, useLoaderData, useParams } from "react-router-dom";
+import { Link,  useParams } from "react-router-dom";
 import useAxiosPublic from "../../firebase/hook/useAuth/useAxiosPublic/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 
 const ViewApartment = () => {
     const {id} = useParams();
@@ -11,7 +10,7 @@ const ViewApartment = () => {
     const {data, isLoading} = useQuery({
         queryKey: ["apartment"],
         queryFn: async() => {
-            const res = await axios.get(`http://localhost:4000/apartment/${id}`)
+            const res = await axiosPublic.get(`http://localhost:4000/apartment/${id}`)
             return res.data;
         }
     })
