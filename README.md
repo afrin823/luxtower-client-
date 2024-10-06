@@ -29,4 +29,6 @@ Payment Integration: SSLCommerz for secure, efficient payment processing
 From the sleek user interface to the secure payment system, every feature has been designed to optimize the user experience. Whether you're a property manager looking for an easier way to manage bookings or a renter searching for your next home, this platform provides everything in one place!
 <br/>
 <br/>
+<br/>
+<br/>
 <img src="https://i.ibb.co.com/M9NtRS0/screencapture-localhost-5173-2024-10-06-16-51-54.png" >
