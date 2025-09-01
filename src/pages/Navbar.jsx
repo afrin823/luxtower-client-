@@ -28,23 +28,23 @@ const Navbar = () => {
 
   const navLink = (
     <div className=" flex md:flex-row flex-col font-semibold mt-5">
-      <NavLink className="mr-5" to="/">
+      <NavLink className="mr-5 text-sky-400" to="/">
         Home
       </NavLink>
-      <NavLink className="mr-5" to="/about">
+      <NavLink className="mr-5 text-sky-400" to="/about">
         About US
       </NavLink>
       {user && (
         <>
-          <NavLink className="mr-5" to="/apartments">
+          <NavLink className="mr-5 text-sky-400" to="/apartments">
             Apartment
           </NavLink>
-          <NavLink className="mr-5" to="/dashboard">
+          <NavLink className="mr-5 text-sky-400" to="/dashboard">
             Dashboad
           </NavLink>
         </>
       )}
-      <NavLink className="mr-5" to="/blog">
+      <NavLink className="mr-5 text-sky-400" to="/blog">
         Blog
       </NavLink>
 
@@ -81,7 +81,7 @@ const Navbar = () => {
           <a className="btn btn-ghost text-xl"><BsBuildings className="text-sky-400 text-4xl font-bold" />LuxTower</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu menu-horizontal px-1 text-sky-400">
             {navLink}
           </ul>
         </div>
